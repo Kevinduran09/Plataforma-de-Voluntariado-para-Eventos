@@ -35,7 +35,7 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
 Para generar un nuevo módulo en el proyecto, utiliza el siguiente comando:
 
 ```bash
-npm run generate:module --nombre <nombre-del-modulo>
+npm run feature -- <nombre-del-modulo>
 ```
 
 Este comando creará la estructura básica de archivos y carpetas para un nuevo módulo siguiendo la arquitectura modular.
