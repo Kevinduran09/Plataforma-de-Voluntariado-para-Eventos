@@ -1,7 +1,9 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
-index("routes/home.tsx"),
-route('detail','routes/EventDetail.tsx'),
-route('create','routes/CreateEvent.tsx')
+  index("features/Landing/pages/LandingPage.tsx"),
+  route('eventDashboard', 'features/EventDashboard/pages/EventDashboardPage.tsx'),
+  route('explore', 'features/Explore/pages/ExplorePage.tsx'),
+  route('calendar', 'features/Calendar/pages/CalendarPage.tsx'),
+  route('createevent', 'features/CreateEvent/pages/CreateEventPage.tsx')
 ] satisfies RouteConfig;
