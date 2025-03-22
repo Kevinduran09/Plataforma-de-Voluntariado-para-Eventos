@@ -71,11 +71,15 @@ export default function Header() {
                 >
                     Create Event
                 </Link>
-                <img
-                    className="rounded-full w-10 h-10"
-                    src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                    alt="Profile"
-                />
+                <Link 
+                    to={'/profile'}
+                >
+                    <img
+                        className="rounded-full w-10 h-10"
+                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                        alt="Profile"
+                    />
+                </Link>
             </div>
         </header>
     );
