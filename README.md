@@ -21,6 +21,7 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
 4. Inicia el servidor de desarrollo:
     ```bash
     npm run dev
+
     ```
 
 ## Iniciar el Servidor JSON
@@ -83,6 +84,7 @@ El servidor JSON proporciona las siguientes rutas:
 - Agregar un nuevo voluntario:
     ```bash
     curl -X POST -H "Content-Type: application/json" -d '{"name": "Carlos Sanchez", "email": "carlos.sanchez@example.com", "phone": "111-222-3333"}' http://localhost:3000/volunteers
+
     ```
 
 ## Stack Tecnológico
@@ -96,7 +98,7 @@ El servidor JSON proporciona las siguientes rutas:
 Para generar un nuevo módulo en el proyecto, utiliza el siguiente comando:
 
 ```bash
-npm run generate:module --nombre <nombre-del-modulo>
+npm run feature -- <nombre-del-modulo>
 ```
 
 Este comando creará la estructura básica de archivos y carpetas para un nuevo módulo siguiendo la arquitectura modular.
