@@ -20,7 +20,7 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
     ```
 4. Inicia el servidor de desarrollo:
     ```bash
-    npm start
+    npm run dev
     ```
 
 ## Stack Tecnológico
