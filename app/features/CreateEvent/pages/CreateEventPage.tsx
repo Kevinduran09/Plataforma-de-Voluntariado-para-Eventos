@@ -8,13 +8,13 @@ export async function clientLoader() {
 
 export default function CreateEventPage() {
     return (
-        <div>
+        <div className='mx-auto max-w-4xl p-6 '>
             <header>
                 <div>
-                    <h2 className="p-3 bg-gray-200 text-gray-700 text-sm flex items-center space-x-2">
-                        <Link to={'/'}>  <a className="font-medium hover:underline">Home</a></Link>
+                    <h2 className="p-3 text-gray-700 text-sm flex items-center space-x-2">
+                        <Link to={'/'} className="font-medium hover:underline"> Home</Link>
 
-                        
+
                         <span className="text-gray-500">›</span>
                         <span className="font-semibold">Crear evento</span>
                     </h2>
@@ -23,7 +23,7 @@ export default function CreateEventPage() {
 
 
                 <div>
-                    <h1  className="text-4xl font-bold text-gray-800 text-left mb-4 p-4">
+                    <h1 className="text-4xl font-bold text-gray-800 text-left mb-4 p-4">
                         Crear nuevo evento
                     </h1>
                 </div>
