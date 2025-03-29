@@ -96,7 +96,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
       <div className="font-mono flex justify-center items-center flex-col gap-3 w-full">
         <h2 className="text-4xl md:text-5xl font-bold text-green-500 text-center">Pagina no encontrada</h2>
         <span className=" text-gray-600 text-2xl md:text-4xl">Error : {message}</span>
-        <img src="/public/NotFount.svg" className="w-full xl:w-1/3" alt="" />
+        <img src="/NotFount.svg" className="w-full xl:w-1/3" alt="Not Found" />
       </div>
     </main>
   );
