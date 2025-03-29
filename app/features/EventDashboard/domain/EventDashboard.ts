@@ -1,4 +1,5 @@
 export interface Evento {
+    categoria: string;
     descripcion: string;
     fecha: Date;
     id: string;
