@@ -1,10 +1,7 @@
 const CACHE_NAME = 'pwa-cache-v1';
 const urlsToCache = [
     '/',
-    '/index.html',
-    '/manifest.json',
-    '/ipngtree-settings-line-black-icon-png-image_3767553png',
-    '/pngtree-settings-line-black-icon-png-image_3767553.png'
+    '/public/pngtree-settings-line-black-icon-png-image_3767553.jpg',
 ];
 
 // Instalar el Service Worker y cachear archivos
