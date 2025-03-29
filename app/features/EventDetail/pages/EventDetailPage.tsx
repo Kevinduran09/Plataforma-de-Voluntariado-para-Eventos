@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import EventDetailComponent from '../ui/EventDetailComponent';
 import { GetEventDetail } from '../useCases/useCaseEventDetail';
 import type { Evento } from '~/features/EventDashboard/domain/EventDashboard';
@@ -24,7 +24,16 @@ export default function EventDetailPage() {
     const { data } = useLoaderData<{ data: Evento }>();
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto max-w-4xl px-3 mt-10">
+            <header>
+                <div>
+                    <h2 className=" text-gray-700 text-sm flex items-center space-x-2">
+                        <Link to={'/'} className="font-medium hover:underline"> Home</Link>
+                        <span className="text-gray-500">›</span>
+                        <span className="font-semibold">{data.nombre}</span>
+                    </h2>
+                </div>
+            </header>
             <EventDetailComponent event={data} />
         </div>
     );

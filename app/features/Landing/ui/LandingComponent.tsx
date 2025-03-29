@@ -15,7 +15,7 @@ export default function LandingComponent() {
                 <div className='w-full md:w-lg'>
                     <img
                         className=''
-                        src='public/volunteering-animate.svg'
+                        src='/volunteering-animate.svg'
                     />
                 </div>
             </article>

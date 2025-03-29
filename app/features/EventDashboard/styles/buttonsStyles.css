@@ -1,16 +1,17 @@
 /* Estilo para el botón de "Más Info" */
 #btnMasInfo {
-    border: 2px solid #38a169; 
-    color: #38a169; 
-    background-color: transparent; 
+  
+    color: #ffffff; 
+    background-color: #14ca69; 
     border-radius: 8px; 
     padding: 6px 16px; 
     margin-right: 10px; 
     font-size: 16px; 
+    font-weight: 400;
   }
   
   #btnMasInfo:hover {
-    background-color: #38a169; 
+    background-color: #10b05b; 
     color: white;
   }
   

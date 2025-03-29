@@ -3,23 +3,26 @@ import type { Evento } from '~/features/EventDashboard/domain/EventDashboard';
 
 const EventDetailComponent: React.FC<{ event: Evento }> = ({ event }) => {
     return (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 px-4 py-6">
             {/* Título del evento */}
-            <div className="text-center">
-                <h1 className="text-4xl font-bold">{event.nombre}</h1>
+            <div className="text-start">
+                <h1 className="text-3xl font-bold">{event.nombre}</h1>
+            </div>
+            <div>
+                <span className="text-1xl me-2 px-2.5 py-1  bg-blue-200 text-blue-500 rounded-xl">{event.categoria}</span>
             </div>
 
             {/* Imagen del evento */}
-            <div className="w-3/5 mx-auto h-72 md:h-80 bg-gray-200 rounded-2xl flex items-center justify-center">
+            <div className="w-full mx-auto h-72 md:h-80 bg-gray-200 rounded-2xl flex items-center justify-center">
                 <img
-                    src={ /* event.imagen || */ "https://via.placeholder.com/800x400"}
+                    src={ /* event.imagen || */ "https://placehold.co/800x400?text=Event+Image"}
                     alt="Event"
                     className="w-full h-full object-cover rounded-2xl"
                 />
             </div>
 
             {/* Información del evento */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 ">
                 {/* Fecha y hora */}
                 <div className="flex items-center gap-4">
                     <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full">
@@ -65,9 +68,9 @@ const EventDetailComponent: React.FC<{ event: Evento }> = ({ event }) => {
             </div>
 
             {/* Descripción del evento */}
-            <div>
+            <div className='mt-5'>
                 <h2 className="text-2xl font-semibold">About This Event</h2>
-                <p className="text-gray-700 mt-2">{event.descripcion}</p>
+                <p className="text-gray-700 p-4">{event.descripcion}</p>
             </div>
 
             {/* Que traer */}
