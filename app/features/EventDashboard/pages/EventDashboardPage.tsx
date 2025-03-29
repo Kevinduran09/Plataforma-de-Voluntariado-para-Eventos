@@ -1,21 +1,39 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router";
 import '../styles/buttonsStyles.css';
 import '../styles/eventStyle.css';
+import type { Route } from '.react-router/types/app/+types/root';
+import type { Evento } from "../domain/EventDashboard";
+import { GetEventDashboard } from "../useCases/useCaseEventDashboard";
 
-export default function Eventos() {
-  const [eventos, setEventos] = useState([]);
+
+
+export function meta({ }: Route.MetaArgs) {
+  return [
+    { title: "EVENTOS VOLUNTARIADO" },
+    { name: "description", content: "Welcome to React Router!" },
+  ];
+}
+
+export async function clientLoader() {
+  const response = await GetEventDashboard();
+
+  if (!response) {
+    throw new Response("Error al cargar los eventos", { status: 500 });
+  }
+  return { data: response }
+}
+
+
+
+export default function EventDashboardPage() {
+
+  const { data: eventos } = useLoaderData<{ data: Evento[] }>();
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("http://localhost:3000/eventos")
-      .then((response) => response.json())
-      .then((data) => setEventos(data))
-      .catch((error) => console.error("Error cargando eventos:", error));
-  }, []);
-
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4">Eventos Cercanos</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {eventos.map((evento) => (
@@ -28,7 +46,7 @@ export default function Eventos() {
             <div className="mt-2 acciones">
               <button
                 id="btnMasInfo"
-                className="bg-green-500 text-white px-3 py-1 rounded mr-2"
+                className="bg-green-500 text-white px-3 py-1 rounded mr-2 transition-all duration-300"
                 onClick={() => navigate(`/eventdetail/${evento.id}`)}
               >
                 Más Info
@@ -40,20 +58,24 @@ export default function Eventos() {
       </div>
 
       <h2 className="text-2xl font-bold mt-8 mb-4">Mis Eventos Registrados</h2>
-      <div className="bg-white shadow rounded-lg p-4">
+      <div className="bg-white rounded-lg p-4">
         <div className="flex justify-between items-center mb-2">
           <h3 className="text-lg font-bold">Mis Eventos Registrados</h3>
           <div>
-            <button id="btnDirecciones" className="text-blue-500 underline mr-4">Direcciones</button>
-            <button id="btnCalendario" className="text-blue-500 underline">Calendario</button>
+            {/* <button id="btnDirecciones" className="text-blue-500 underline mr-4">Direcciones</button>
+            <button id="btnCalendario" className="text-blue-500 underline">Calendario</button> */}
           </div>
         </div>
         <ul>
-          <li className="border-b py-2">Animal Shelter Support • Mañana, 2:00 PM • Confirmado</li>
-          <li className="border-b py-2">Literacy Workshop • Próximo lunes, 5:30 PM • Pendiente</li>
+          <li className="">Animal Shelter Support • Mañana, 2:00 PM • Confirmado</li>
+          <li className="">Literacy Workshop • Próximo lunes, 5:30 PM • Pendiente</li>
           <li className="py-2">Community Garden • Próximo sábado, 9:00 AM • Confirmado</li>
         </ul>
-        <button id="btnVerTodos" className="mt-4 w-full bg-blue-500 text-white py-2 rounded">Ver Todos Mis Eventos</button>
+        <div className="w-full flex justify-center">
+          <button id="btnVerTodos" className="mt-4 w-fit bg-blue-500 text-white py-2 px-3 rounded-lg transition-all duration-300">
+            Ver Todos Mis Eventos
+          </button>
+        </div>
       </div>
     </div>
   );
