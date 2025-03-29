@@ -60,7 +60,6 @@ export default function EventDashboardPage() {
       <h2 className="text-2xl font-bold mt-8 mb-4">Mis Eventos Registrados</h2>
       <div className="bg-white rounded-lg p-4">
         <div className="flex justify-between items-center mb-2">
-          <h3 className="text-lg font-bold">Mis Eventos Registrados</h3>
           <div>
             {/* <button id="btnDirecciones" className="text-blue-500 underline mr-4">Direcciones</button>
             <button id="btnCalendario" className="text-blue-500 underline">Calendario</button> */}
