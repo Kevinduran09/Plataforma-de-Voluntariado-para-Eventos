@@ -60,6 +60,7 @@
     },
     {
       "id": "3",
+      "categoria": "Ambiental",
       "nombre": "Limpieza de Playa",
       "descripcion": "Actividad para recolectar desechos y limpiar la costa.",
       "fecha": "2025-04-20",

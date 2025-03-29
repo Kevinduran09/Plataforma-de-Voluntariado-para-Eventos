@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import '../styles/buttonsStyles.css';
 import '../styles/eventStyle.css';
 
 export default function Eventos() {
   const [eventos, setEventos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:3000/eventos")
@@ -24,7 +26,13 @@ export default function Eventos() {
             <p className="text-gray-500 text-sm lugar">{evento.lugar} • {new Date(evento.fecha).toLocaleDateString()}</p>
             <p className="text-gray-500 text-sm voluntarios-requeridos">{evento.voluntarios_requeridos} voluntarios requeridos</p>
             <div className="mt-2 acciones">
-              <button id="btnMasInfo" className="bg-green-500 text-white px-3 py-1 rounded mr-2">Más Info</button>
+              <button
+                id="btnMasInfo"
+                className="bg-green-500 text-white px-3 py-1 rounded mr-2"
+                onClick={() => navigate(`/eventdetail/${evento.id}`)}
+              >
+                Más Info
+              </button>
               <button id="btnCompartir" className="bg-green-500 text-white px-3 py-1 rounded">Compartir</button>
             </div>
           </div>
