@@ -14,6 +14,9 @@ export const ItemListComponent: React.FC<{ item: Evento }> = ({ item }) => {
                 <div className='flex flex-col py-2 gap-3'>
                     <span>Descripcion: {item.descripcion}</span>
                 </div>
+                <div className='flex flex-col py-2 gap-3'>
+                    <span>Categoria: {item.categoria}</span>
+                </div>
                 <div className='flex flex-col gap-5 mt-5'>
                     <h2 className='font-semibold'>Tareas</h2>
                     {item.tareas.map((tarea) => {

@@ -36,6 +36,7 @@
   "eventos": [
     {
       "id": "1",
+      "categoria": "Ambiental",
       "nombre": "Reforestación en el parque",
       "descripcion": "Evento de reforestación para mejorar las áreas verdes.",
       "fecha": "2025-04-10",
@@ -58,7 +59,8 @@
       "organizador_id": 1
     },
     {
-      "id": "2",
+      "id": "3",
+      "categoria": "Ambiental",
       "nombre": "Limpieza de Playa",
       "descripcion": "Actividad para recolectar desechos y limpiar la costa.",
       "fecha": "2025-04-20",
@@ -75,6 +77,30 @@
         },
         {
           "nombre": "Clasificar residuos",
+          "estado": "pendiente"
+        }
+      ],
+      "organizador_id": 3
+    },
+    {
+      "id": "4",
+      "categoria": "Humanitario",
+      "nombre": "Recolección de alimentos",
+      "descripcion": "Evento para recolectar alimentos no perecederos.",
+      "fecha": "2025-05-01",
+      "lugar": "Centro de San José",
+      "voluntarios_requeridos": 15,
+      "tareas": [
+        {
+          "nombre": "Llevar control de ingreso de alimentos",
+          "estado": "pendiente"
+        },
+        {
+          "nombre": "Clasificar alimentos",
+          "estado": "pendiente"
+        },
+        {
+          "nombre": "Almacenar alimentos",
           "estado": "pendiente"
         }
       ],

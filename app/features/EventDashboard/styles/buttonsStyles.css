@@ -1,0 +1,78 @@
+/* Estilo para el botón de "Más Info" */
+#btnMasInfo {
+    border: 2px solid #38a169; 
+    color: #38a169; 
+    background-color: transparent; 
+    border-radius: 8px; 
+    padding: 6px 16px; 
+    margin-right: 10px; 
+    font-size: 16px; 
+  }
+  
+  #btnMasInfo:hover {
+    background-color: #38a169; 
+    color: white;
+  }
+  
+  /* Estilo para el botón de "Compartir" */
+  #btnCompartir {
+    border: 2px solid transparent;
+    color: #000000; 
+    background-color: transparent; 
+    border-radius: 8px; 
+    padding: 6px 16px; 
+    margin-right: 10px; 
+    font-size: 16px; 
+  }
+  
+  #btnCompartir:hover {
+    color: #38a169; 
+    background-color: transparent; 
+  }
+  
+  /* Estilo para el botón de "Ver Todos Mis Eventos" */
+  #btnVerTodos {
+    border: 2px solid #3b82f6;
+    color: #3b82f6; 
+    background-color: transparent;
+  }
+  
+  #btnVerTodos:hover {
+    background-color: #3b82f6; 
+    color: white; 
+  }
+  
+ /* Estilo para el botón de "Direcciones" */
+#btnDirecciones {
+    border: 2px solid #3b82f6;
+    color: #3b82f6; 
+    background-color: transparent; 
+    border-radius: 8px; 
+    padding: 6px 12px; 
+    margin-right: 10px; 
+    font-size: 16px;
+    text-decoration: none; 
+  }
+  
+  #btnDirecciones:hover {
+    background-color: #3b82f6; 
+    color: white; 
+  }
+  
+  /* Estilo para el botón de "Calendario" */
+  #btnCalendario {
+    border: 2px solid #3b82f6; 
+    color: #3b82f6; 
+    background-color: transparent; 
+    border-radius: 8px; 
+    padding: 6px 12px; 
+    margin-right: 10px; 
+    font-size: 16px; 
+    text-decoration: none;
+  }
+  
+  #btnCalendario:hover {
+    background-color: #3b82f6; 
+    color: white; 
+  }
+  
