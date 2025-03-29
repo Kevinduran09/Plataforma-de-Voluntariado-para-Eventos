@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import DropZone from "../useCases/DropZone";
-
+import TagsInput from "../useCases/TagsInput";
 
 
 
@@ -82,9 +82,10 @@ export default function FormularioEvento() {
                     required
                 >
                     <option value="" selected disabled>Seleccione la categoría del evento</option>
-                    <option value="conference">Conferencia</option>
-                    <option value="workshop">Taller</option>
-                    <option value="webinar">Seminario web</option>
+                    <option value="conferencia">Conferencia</option>
+                    <option value="taller">Taller</option>
+                    <option value="seminario">Seminario web</option>
+                    <option value="otro">Otro</option>
                 </select>
             </div>
 
@@ -179,6 +180,18 @@ export default function FormularioEvento() {
                     </select>
                 </div>
             </div>
+            
+             {/* Tarea a realizar (tag input) */}
+             <div>
+                <label htmlFor="description" className="block text-sm font-medium text-gray-900">
+                   Tareas a realizar
+                </label>
+                <TagsInput />
+            </div>
+
+
+
+
             {/* Requisitos adicionales */}
             <div className="space-y-4">
                 <label className="block text-sm font-medium text-gray-900">
