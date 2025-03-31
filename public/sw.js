@@ -2,6 +2,10 @@ const CACHE_NAME = 'pwa-cache-v1';
 const urlsToCache = [
     '/',
     '/public/pngtree-settings-line-black-icon-png-image_3767553.jpg',
+    '/public/volunteering-animate.svg',
+    '/public/NotFount.svg',
+    '/createevent',
+    
 ];
 
 // Instalar el Service Worker y cachear archivos
@@ -18,6 +22,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request).then((response) => {
             return response || fetch(event.request);
+            
         })
     );
 });

@@ -20,7 +20,9 @@
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "react-router": "^7.3.0",
+
     "react-router-dom": "^7.4.1"
+
   },
   "devDependencies": {
     "@react-router/dev": "^7.3.0",
