@@ -6,6 +6,8 @@ const KeyCodes = {
   enter: 13,
 };
 
+
+
 const delimiters = [KeyCodes.enter];
 
 const TagsInput: React.FC = () => {
@@ -20,7 +22,7 @@ const TagsInput: React.FC = () => {
   };
 
   return (
-    <div className="mt-1 w-full">
+    <div className="mt-1 w-full" >
       <ReactTags
         tags={tags.map((tag, index) => ({
           ...tag,
