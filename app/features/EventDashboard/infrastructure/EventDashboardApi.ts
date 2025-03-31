@@ -8,4 +8,8 @@ export const EventDashboardApi = {
         const response = await fetch('http://localhost:3000/eventos/');
         return response.json();
     },
+    getEventsByUser: async (userId: string)=>{
+        const response = await fetch(`http://localhost:3000/inscripciones?usuarioId=${userId}&_embed=evento`)
+        return response.json()
+    }
 }

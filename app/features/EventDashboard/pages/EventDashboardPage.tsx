@@ -5,6 +5,8 @@ import '../styles/eventStyle.css';
 import type { Route } from '.react-router/types/app/+types/root';
 import type { Evento } from "../domain/EventDashboard";
 import { GetEventDashboard } from "../useCases/useCaseEventDashboard";
+import useAuthStore from "~/store/useAuthStore";
+import InscriptionEvents from "../ui/InscriptionEvents";
 
 
 
@@ -29,7 +31,7 @@ export async function clientLoader() {
 export default function EventDashboardPage() {
 
   const { data: eventos } = useLoaderData<{ data: Evento[] }>();
-
+  const {isAuth} = useAuthStore()
   const navigate = useNavigate();
 
   return (
@@ -57,25 +59,11 @@ export default function EventDashboardPage() {
         ))}
       </div>
 
-      <h2 className="text-2xl font-bold mt-8 mb-4">Mis Eventos Registrados</h2>
-      <div className="bg-white rounded-lg p-4">
-        <div className="flex justify-between items-center mb-2">
-          <div>
-            {/* <button id="btnDirecciones" className="text-blue-500 underline mr-4">Direcciones</button>
-            <button id="btnCalendario" className="text-blue-500 underline">Calendario</button> */}
-          </div>
-        </div>
-        <ul>
-          <li className="">Animal Shelter Support • Mañana, 2:00 PM • Confirmado</li>
-          <li className="">Literacy Workshop • Próximo lunes, 5:30 PM • Pendiente</li>
-          <li className="py-2">Community Garden • Próximo sábado, 9:00 AM • Confirmado</li>
-        </ul>
-        <div className="w-full flex justify-center">
-          <button id="btnVerTodos" className="mt-4 w-fit bg-blue-500 text-white py-2 px-3 rounded-lg transition-all duration-300">
-            Ver Todos Mis Eventos
-          </button>
-        </div>
-      </div>
+      {true ? (
+        <InscriptionEvents/>
+      )
+      :''
+      }
     </div>
   );
 }

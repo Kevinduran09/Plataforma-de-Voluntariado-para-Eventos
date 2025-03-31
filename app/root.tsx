@@ -47,11 +47,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {/* <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/pngtree-settings-line-black-icon-png-image_3767553.png"/>
-        <link rel="apple-touch-icon" href="/pngtree-settings-line-black-icon-png-image_3767553.png"/>
-        <meta name="theme-color" content="#ffffff"/> */}
+        <link rel="manifest" href="/manifest.json" />
+   
+        <link rel="icon" href="/volunthub-192x192.png"/>
+        
 
 
         <Meta />
@@ -70,7 +69,6 @@ export default function App() {
 
   return (
     <>
-      <Header />
       <Outlet />
     </>
   )

@@ -1,0 +1,31 @@
+{
+    "id": "/",
+    "description": "Aplicación Voluntariado para la comunidad",
+    "icons": [
+        {
+            "src": "/volunthub-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/volunthub-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "name": "VoluntHub",
+    "short_name": "VoluntHub",
+    "theme_color": "#000000",
+    "background_color": "#11da69",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "screenshots": [
+        {
+            "src": "/screenshot.png",
+            "sizes": "1919x974",
+            "type": "image/png"
+        }
+      
+    ]
+}
