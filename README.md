@@ -20,7 +20,71 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
     ```
 4. Inicia el servidor de desarrollo:
     ```bash
-    npm start
+    npm run dev
+
+    ```
+
+## Iniciar el Servidor JSON
+
+Para iniciar el servidor JSON, utiliza el siguiente comando:
+
+```bash
+npm run server
+```
+
+Este comando levantará un servidor JSON en `http://localhost:3000`.
+
+## API del Servidor JSON
+
+El servidor JSON proporciona las siguientes rutas:
+
+- **GET /volunteers**: Obtiene la lista de voluntarios.
+- **POST /volunteers**: Agrega un nuevo voluntario.
+- **GET /volunteers/:id**: Obtiene un voluntario por ID.
+- **PUT /volunteers/:id**: Actualiza un voluntario por ID.
+- **DELETE /volunteers/:id**: Elimina un voluntario por ID.
+
+### Ejemplos de Respuestas
+
+- **GET /volunteers**
+    ```json
+    [
+      {
+        "id": 1,
+        "name": "Juan Perez",
+        "email": "juan.perez@example.com",
+        "phone": "123-456-7890"
+      },
+      {
+        "id": 2,
+        "name": "Maria Lopez",
+        "email": "maria.lopez@example.com",
+        "phone": "098-765-4321"
+      }
+    ]
+    ```
+
+- **POST /volunteers**
+    ```json
+    {
+      "id": 3,
+      "name": "Carlos Sanchez",
+      "email": "carlos.sanchez@example.com",
+      "phone": "111-222-3333"
+    }
+    ```
+
+### Ejemplos de Consultas
+
+- Obtener todos los voluntarios:
+    ```bash
+    curl http://localhost:3000/volunteers
+    ```
+
+- Agregar un nuevo voluntario:
+    ```bash
+    curl -X POST -H "Content-Type: application/json" -d '{"name": "Carlos Sanchez", "email": "carlos.sanchez@example.com", "phone": "111-222-3333"}' http://localhost:3000/volunteers
+
     ```
 
 ## Stack Tecnológico
@@ -28,7 +92,6 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
 - **Frontend**: React, Tailwind CSS
 - **Backend**: Node.js, Express
 - **Base de Datos**: MongoDB
-- **Autenticación**: JWT (JSON Web Tokens)
 
 ## Comando Custom para Generar un Módulo
 
@@ -56,17 +119,3 @@ El proyecto sigue los principios de Clean Architecture para mantener un código 
   - **utils**: Utilidades y funciones helper.
 
 Esta estructura permite una fácil escalabilidad y mantenimiento del código, asegurando que cada módulo sea independiente y cohesivo.
-
-## Contribuir
-
-Si deseas contribuir al proyecto, por favor sigue estos pasos:
-
-1. Haz un fork del repositorio.
-2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
-3. Realiza tus cambios y haz commit (`git commit -m 'Añadir nueva funcionalidad'`).
-4. Sube tus cambios (`git push origin feature/nueva-funcionalidad`).
-5. Abre un Pull Request.
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.

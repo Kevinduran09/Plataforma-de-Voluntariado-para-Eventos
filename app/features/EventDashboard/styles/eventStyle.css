@@ -1,0 +1,49 @@
+/* Estilo para las categorías */
+.categoria {
+    font-size: 1rem;
+    color: #2D3748;
+    margin-bottom: 8px; 
+  }
+  
+  /* Estilo para los nombres de los eventos */
+  .nombre {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #2D3748;
+    margin-bottom: 8px; 
+  }
+  
+  /* Estilo para las descripciones de los eventos */
+  .descripcion {
+    font-size: 1rem;
+    color: #4A5568;
+    margin-bottom: 8px; 
+  }
+  
+  /* Estilo para las fechas de los eventos */
+  .fecha {
+    font-size: 0.875rem;
+    color: #718096;
+    margin-bottom: 8px; 
+  }
+  
+  /* Estilo para los lugares de los eventos */
+  .lugar {
+    font-size: 1rem;
+    color: #2D3748;
+    margin-bottom: 8px;
+  }
+  
+  /* Estilo para los voluntarios requeridos */
+  .voluntarios-requeridos {
+    font-size: 0.875rem;
+    color: #4A5568;
+    margin-bottom: 8px; 
+  }
+  
+  /* Estilo para los botones de acciones */
+  .acciones button {
+    cursor: pointer;
+    margin-top: 12px; 
+  }
+  

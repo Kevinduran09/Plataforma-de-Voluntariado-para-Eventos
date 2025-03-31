@@ -5,5 +5,7 @@ export default [
   route('eventDashboard', 'features/EventDashboard/pages/EventDashboardPage.tsx'),
   route('explore', 'features/Explore/pages/ExplorePage.tsx'),
   route('calendar', 'features/Calendar/pages/CalendarPage.tsx'),
-  route('createevent', 'features/CreateEvent/pages/CreateEventPage.tsx')
+  route('createevent', 'features/CreateEvent/pages/CreateEventPage.tsx'),
+  route('profile', 'features/Profile/pages/ProfilePage.tsx'),
+  route('eventdetail/:id', 'features/EventDetail/pages/EventDetailPage.tsx')
 ] satisfies RouteConfig;

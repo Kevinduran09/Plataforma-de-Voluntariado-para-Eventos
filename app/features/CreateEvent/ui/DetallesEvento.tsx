@@ -8,7 +8,7 @@ export default function FormularioEvento() {
     return (
 
 
-        <form className="space-y-6 p-6 bg-white shadow-md rounded-lg">
+        <form className="space-y-6 p-6 bg-white  rounded-lg">
 
             <header>
                 <div>
@@ -80,6 +80,7 @@ export default function FormularioEvento() {
                     id="category"
                     className="mt-1 w-full p-3  rounded-lg bg-gray-50 text-gray-900"
                     required
+                    defaultValue={''} 
                 >
                     <option value="" selected disabled>Seleccione la categoría del evento</option>
                     <option value="conferencia">Conferencia</option>

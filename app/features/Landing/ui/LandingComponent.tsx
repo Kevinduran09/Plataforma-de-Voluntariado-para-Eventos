@@ -10,12 +10,12 @@ export default function LandingComponent() {
                     </h1>
                     <span className='text-gray-600 font-semibold mt-3'>Unete y colabora con miembros de tu comunidad  en actividades de bienestar comunitario</span>
 
-                    <Link to={'/EventDashboard'} className='bg-green-500 w-fit p-2 mt-4 rounded-lg text-white hover:bg-green-600 transition-all cursor-pointer'>Explorar ahora</Link>
+                    <Link to={'/eventDashboard'} className='bg-green-500 w-fit p-2 mt-4 rounded-lg text-white hover:bg-green-600 transition-all cursor-pointer'>Explorar ahora</Link>
                 </div>
                 <div className='w-full md:w-lg'>
                     <img
                         className=''
-                        src='public/volunteering-animate.svg'
+                        src='/volunteering-animate.svg'
                     />
                 </div>
             </article>
