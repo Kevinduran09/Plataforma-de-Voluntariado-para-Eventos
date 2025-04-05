@@ -8,19 +8,19 @@
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "feature": "node ./scripts/generateFeature.cjs",
-    "server": "json-server --watch db.json --port 3000",
-    "serve": "node api/server.js"
+    "server": "json-server --watch db.json"
   },
   "dependencies": {
     "@react-router/node": "^7.3.0",
     "@react-router/serve": "^7.3.0",
     "isbot": "^5.1.17",
-    "json-server": "^0.17.0",
+    "json-server": "^1.0.0-beta.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "react-router": "^7.3.0",
     "react-router-dom": "^7.4.1",
+    "react-tag-input": "^6.10.6",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

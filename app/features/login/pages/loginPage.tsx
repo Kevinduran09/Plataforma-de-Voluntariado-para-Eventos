@@ -22,7 +22,7 @@ export async function clientAction({ request }: ActionFunctionArgs) {
         }
 
         useAuthStore.getState().setAuth(user[0]);
-        return redirect("/");
+        return redirect("/eventDashboard");
     } catch (error) {
         
         console.error("Error en la autenticación:", error);
