@@ -4,11 +4,10 @@ import TagsInput from "../useCases/TagsInput";
 
 
 
-export default function FormularioEvento() {
+
+export const FormularioEvento:React.FC =()=> {
     return (
-
-
-        <form className="space-y-6 p-6 bg-white  rounded-lg">
+        <form className="space-y-6 p-6 rounded-lg 00">
 
             <header>
                 <div>
@@ -26,7 +25,7 @@ export default function FormularioEvento() {
                     type="text"
                     id="event_title"
                     placeholder="Ingrese el título del evento"
-                    className="mt-1 w-full p-3  rounded-lg bg-gray-50 text-gray-900"
+                    className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900"
                     required
                 />
             </div>
@@ -40,7 +39,7 @@ export default function FormularioEvento() {
                     <input
                         type="date"
                         id="date"
-                        className="mt-1 w-full p-3  rounded-lg bg-gray-50 text-gray-900"
+                        className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900"
                         required
                     />
                 </div>
@@ -51,7 +50,7 @@ export default function FormularioEvento() {
                     <input
                         type="time"
                         id="time"
-                        className="mt-1 w-full p-3  rounded-lg bg-gray-50 text-gray-900"
+                        className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900"
                         required
                     />
                 </div>
@@ -66,7 +65,7 @@ export default function FormularioEvento() {
                     type="text"
                     id="location"
                     placeholder="Ingrese la ubicación del evento"
-                    className="mt-1 w-full p-3  rounded-lg bg-gray-50 text-gray-900"
+                    className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900"
                     required
                 />
             </div>
@@ -78,11 +77,11 @@ export default function FormularioEvento() {
                 </label>
                 <select
                     id="category"
-                    className="mt-1 w-full p-3  rounded-lg bg-gray-50 text-gray-900"
+                    className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-700"
                     required
                     defaultValue={''} 
                 >
-                    <option value="" selected disabled>Seleccione la categoría del evento</option>
+                    <option value="" selected disabled className=''>Seleccione la categoría del evento</option>
                     <option value="conferencia">Conferencia</option>
                     <option value="taller">Taller</option>
                     <option value="seminario">Seminario web</option>
@@ -98,7 +97,7 @@ export default function FormularioEvento() {
                 <textarea
                     id="description"
                     placeholder="Describa su evento y las actividades a realizar"
-                    className="mt-1 w-full p-3  rounded-lg bg-gray-50 text-gray-900 h-24"
+                    className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900 h-24"
                     style={{ maxHeight: '200px', minHeight: "100px" }}
                     required
                 ></textarea>
@@ -129,7 +128,7 @@ export default function FormularioEvento() {
                     type="number"
                     min="1"
                     placeholder="Ej: 10"
-                    className="mt-1 w-full p-3 rounded-lg bg-gray-50 text-gray-900"
+                    className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                 />
             </div>
 
@@ -146,7 +145,7 @@ export default function FormularioEvento() {
                         <input
                             type="text"
                             placeholder="Lista separada por comas"
-                            className="w-full p-3 rounded-lg bg-gray-50 text-gray-900"
+                            className="w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         />
                     </div>
                     <div>
@@ -156,7 +155,7 @@ export default function FormularioEvento() {
                         <input
                             type="text"
                             placeholder="Lista separada por comas"
-                            className="w-full p-3 rounded-lg bg-gray-50 text-gray-900"
+                            className="w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         />
                     </div>
                 </div>
@@ -169,7 +168,7 @@ export default function FormularioEvento() {
                 </label>
                 <div className="flex items-center space-x-4">
                     <select
-                        className="p-3 rounded-lg bg-gray-50 text-gray-900"
+                        className="p-3 rounded-lg bg-gray-100 text-gray-900"
                         required
                     >
                         <option value="" disabled selected>Seleccione una opción</option>
@@ -200,7 +199,7 @@ export default function FormularioEvento() {
                 </label>
                 <textarea
                     placeholder="Ej: Certificación en primeros auxilios, disponibilidad los fines de semana..."
-                    className="w-full p-3 rounded-lg bg-gray-50 text-gray-900 min-h-[100px]"
+                    className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 min-h-[100px]"
                     style={{ maxHeight: '200px', minHeight: "100px" }}
                     required
                 />

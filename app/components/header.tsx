@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import useAuthStore from "~/store/useAuthStore";
 
 const headerLinks = [
     {
@@ -14,14 +15,14 @@ const headerLinks = [
     },
     {
         title: 'Calendar',
-        url: 'calendar',
+        url: '/calendar',
         icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-calendar-week"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>
     }
 ];
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
-
+    const { isAuth } = useAuthStore()
     return (
         <header className="w-full flex items-center justify-between py-5 px-5 border-b-2 border-gray-200">
             {/* Logo */}
@@ -61,26 +62,33 @@ export default function Header() {
             </div>
 
             {/* Botones de ayuda, crear evento y perfil */}
-            <div className="hidden lg:flex items-center gap-5">
-                <Link to="/help" className="font-semibold">
-                    Help
+            {isAuth ? (
+                <div className="hidden lg:flex items-center gap-5">
+                    <Link to="/help" className="font-semibold">
+                        Help
+                    </Link>
+                    <Link
+                        to={"/createevent"}
+                        className="bg-green-500 p-2 rounded-lg text-white hover:bg-green-600 transition-all"
+                    >
+                        Create Event
+                    </Link>
+                    <Link
+                        to={'/profile'}
+                    >
+                        <img
+                            className="rounded-full w-10 h-10"
+                            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                            alt="Profile"
+                        />
+                    </Link>
+                </div>
+            ) : (
+                <Link to="/login" className="font-medium text-green-600 text-xl mr-5">
+                    Iniciar Sesion
                 </Link>
-                <Link
-                    to={"/createevent"}
-                    className="bg-green-500 p-2 rounded-lg text-white hover:bg-green-600 transition-all"
-                >
-                    Create Event
-                </Link>
-                <Link 
-                    to={'/profile'}
-                >
-                    <img
-                        className="rounded-full w-10 h-10"
-                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                        alt="Profile"
-                    />
-                </Link>
-            </div>
+            )}
+
         </header>
     );
 }

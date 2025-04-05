@@ -32,6 +32,7 @@ const TagsInput: React.FC = () => {
         handleAddition={handleAddition}
         delimiters={delimiters}
         inputFieldPosition="inline"
+        autoFocus={false}
         placeholder= "Escribe la tarea a realizar y presiona Enter para agregar."
         autocomplete
         classNames={{

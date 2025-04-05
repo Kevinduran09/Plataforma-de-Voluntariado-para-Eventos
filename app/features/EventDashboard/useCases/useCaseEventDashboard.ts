@@ -6,7 +6,7 @@ export const GetEventDashboard = async () => {
     return repository.getData() ;
 };
 
-export const SubscribeEventDashboard = async (data:any) => {
+export const GetInscriptionEvents = async (userId:string) => {
     const repository = new EventDashboardRepository(EventDashboardApi);
-    return repository.subscribe(data);
+    return repository.geInscriptionEvents(userId);
 };

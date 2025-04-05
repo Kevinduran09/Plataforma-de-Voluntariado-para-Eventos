@@ -1,14 +1,11 @@
 import React from 'react';
-import PrimeraParte from '../ui/DetallesEvento';
+import { FormularioEvento } from '../ui/FormularioEvento';
 import { Link } from 'react-router';
 
-export async function clientLoader() {
-    // Logica de consulta de datos
-}
 
 export default function CreateEventPage() {
     return (
-        <div className='mx-auto max-w-4xl p-6 '>
+        <div className='container mx-auto max-w-4xl px-3 mt-10'>
             <header>
                 <div>
                     <h2 className="p-3 text-gray-700 text-sm flex items-center space-x-2">
@@ -21,17 +18,13 @@ export default function CreateEventPage() {
                 </div>
 
 
-
-                <div>
-                    <h1 className="text-4xl font-bold text-gray-800 text-left mb-4 p-4">
-                        Crear nuevo evento
-                    </h1>
-                </div>
-
-
-
             </header>
-            <PrimeraParte />
+            <div >
+                <h1 className="text-4xl font-bold text-gray-800 text-left mb-4 p-4">
+                    Crear nuevo evento
+                </h1>
+                <FormularioEvento />
+            </div>
         </div>
     );
 }

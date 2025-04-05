@@ -14,3 +14,11 @@ export interface Tarea {
     estado: string;
     nombre: string;
 }
+
+export interface Inscripciones {
+    evento: Evento;
+    eventoId: string;
+    fecha_inscripcion: Date;
+    id: string;
+    usuarioId: string;
+}

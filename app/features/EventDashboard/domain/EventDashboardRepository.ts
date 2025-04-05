@@ -16,8 +16,8 @@ class EventDashboardRepository {
     return this.api?.getInfo()
   }
 
-  async subscribe(data: any) {
-    // Lógica para suscribirse
+  async geInscriptionEvents(userId: string) {
+    return this.api?.getEventsByUser(userId)
   }
 }
 export default EventDashboardRepository;

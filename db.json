@@ -42,6 +42,7 @@
       "fecha": "2025-04-10",
       "lugar": "Parque Nacional",
       "voluntarios_requeridos": 20,
+      "organizador_id": "1",
       "tareas": [
         {
           "nombre": "Repartir bolsas y guantes",
@@ -55,17 +56,17 @@
           "nombre": "Clasificar residuos",
           "estado": "pendiente"
         }
-      ],
-      "organizador_id": 1
+      ]
     },
     {
-      "id": "3",
+      "id": "2",
       "categoria": "Ambiental",
       "nombre": "Limpieza de Playa",
       "descripcion": "Actividad para recolectar desechos y limpiar la costa.",
       "fecha": "2025-04-20",
       "lugar": "Playa Tamarindo",
       "voluntarios_requeridos": 25,
+      "organizador_id": "3",
       "tareas": [
         {
           "nombre": "Repartir bolsas y guantes",
@@ -79,51 +80,26 @@
           "nombre": "Clasificar residuos",
           "estado": "pendiente"
         }
-      ],
-      "organizador_id": 3
-    },
-    {
-      "id": "4",
-      "categoria": "Humanitario",
-      "nombre": "Recolección de alimentos",
-      "descripcion": "Evento para recolectar alimentos no perecederos.",
-      "fecha": "2025-05-01",
-      "lugar": "Centro de San José",
-      "voluntarios_requeridos": 15,
-      "tareas": [
-        {
-          "nombre": "Llevar control de ingreso de alimentos",
-          "estado": "pendiente"
-        },
-        {
-          "nombre": "Clasificar alimentos",
-          "estado": "pendiente"
-        },
-        {
-          "nombre": "Almacenar alimentos",
-          "estado": "pendiente"
-        }
-      ],
-      "organizador_id": 3
+      ]
     }
   ],
   "inscripciones": [
     {
       "id": "1",
-      "evento_id": 1,
-      "usuario_id": 2,
+      "eventoId": "1",
+      "usuarioId": "2",
       "fecha_inscripcion": "2025-03-20"
     },
     {
       "id": "2",
-      "evento_id": 1,
-      "usuario_id": 3,
+      "eventoId": "1",
+      "usuarioId": "3",
       "fecha_inscripcion": "2025-03-21"
     },
     {
       "id": "3",
-      "evento_id": 2,
-      "usuario_id": 1,
+      "eventoId": "2",
+      "usuarioId": "2",
       "fecha_inscripcion": "2025-03-22"
     }
   ]
