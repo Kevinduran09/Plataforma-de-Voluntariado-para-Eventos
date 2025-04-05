@@ -1,8 +1,8 @@
 import CreateEventRepository from '../domain/CreateEventRepository';
 import {CreateEventApi} from '../infrastructure/CreateEventApi'
-export const GetCreateEvent = async () => {
+export const PostCreateEvent = async (data:any) => {
     const repository = new CreateEventRepository(CreateEventApi);
-    return repository.getData();
+    return repository.postData(data);
 };
 
 export const SubscribeCreateEvent = async (data:any) => {

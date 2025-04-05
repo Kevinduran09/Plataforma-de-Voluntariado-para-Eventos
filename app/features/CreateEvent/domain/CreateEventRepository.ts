@@ -12,8 +12,12 @@ class CreateEventRepository {
     CreateEventRepository.instance = this;
     }
 
-  async getData() {
-        // Lógica para obtener datos
+  async postData(data: any) {
+    const response = await this.api?.createEvent(data);
+        if (!response || response.length === 0) {
+            return null;
+        }
+        return response;
     }
 
   async subscribe(data:any) {

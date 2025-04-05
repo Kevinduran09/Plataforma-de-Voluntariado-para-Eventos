@@ -1,11 +1,12 @@
 import { Link } from 'react-router';
-import DropZone from "../useCases/DropZone";
-import TagsInput from "../useCases/TagsInput";
+import DropZone from "../infrastructure/DropZone";
+import TagsInput from "../infrastructure/TagsInput";
 
 
 
 
 export const FormularioEvento:React.FC =()=> {
+    // agregar la logica para capturar todos los datos del formulario y enviarlos a la api    
     return (
         <form className="space-y-6 p-6 rounded-lg 00">
 
