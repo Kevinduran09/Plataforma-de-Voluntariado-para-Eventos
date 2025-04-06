@@ -5,6 +5,7 @@ import TagsInput from "../ui/TagsInput";
 import { CreateEventApi } from "../infrastructure/CreateEventApi";
 import type { Tag } from "react-tag-input";
 import { PostCreateEvent } from '../useCases/useCaseCreateEvent';
+import useAuthStore from '~/store/useAuthStore';
 
 export const FormularioEvento: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -19,8 +20,9 @@ export const FormularioEvento: React.FC = () => {
         optionalSkills: '',
         ageRequirement: '',
         additionalRequirements: '',
+        organizador_id: ''
     });
-
+    const { user } = useAuthStore()
     const [tags, setTags] = useState<Tag[]>([]);
     const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -37,26 +39,40 @@ export const FormularioEvento: React.FC = () => {
         const formDataToSend = new FormData();
 
         // Agregar campos del formulario
-        formDataToSend.append('title', formData.eventTitle);
-        formDataToSend.append('date', formData.date);
-        formDataToSend.append('time', formData.time);
-        formDataToSend.append('location', formData.location);
-        formDataToSend.append('category', formData.category);
-        formDataToSend.append('description', formData.description);
-        formDataToSend.append('volunteersNeeded', formData.volunteersNeeded);
-        formDataToSend.append('requiredSkills', formData.requiredSkills);
-        formDataToSend.append('optionalSkills', formData.optionalSkills);
-        formDataToSend.append('ageRequirement', formData.ageRequirement);
-        formDataToSend.append('additionalRequirements', formData.additionalRequirements);
-        formDataToSend.append('tasks', JSON.stringify(tags.map(tag => tag.text)));
+        formDataToSend.append('categoria', formData.category);
+        formDataToSend.append('nombre', formData.eventTitle);
+        formDataToSend.append('descripcion', formData.description);
+        formDataToSend.append('fecha', formData.date);
+        formDataToSend.append('lugar', formData.location);
+        formDataToSend.append('voluntarios_requeridos', formData.volunteersNeeded);
+
+        formDataToSend.append("organizador_id", user.id);
+
+        formDataToSend.append('tareas',
+            JSON.stringify(
+                tags.map(tag => ({
+                    nombre: tag.text,
+                    estado: 'pendiente'
+                }))
+            ));
+        //formDataToSend.append('time', formData.time);
+
+        /* 
+         formDataToSend.append('requiredSkills', formData.requiredSkills);
+         formDataToSend.append('optionalSkills', formData.optionalSkills);
+         formDataToSend.append('ageRequirement', formData.ageRequirement);
+         formDataToSend.append('additionalRequirements', formData.additionalRequirements);
+          */
+
 
         // Agregar imagen si existe
-        if (imageFile) {
+
+        /* if (imageFile) {
             formDataToSend.append('image', imageFile);
-        }
+        } */
 
         try {
-             const result = await PostCreateEvent(formDataToSend);
+            const result = await PostCreateEvent(formDataToSend);
             console.log('Evento creado:', result);
         } catch (error) {
             console.error('Error al crear evento:', error);
@@ -67,24 +83,24 @@ export const FormularioEvento: React.FC = () => {
 
         // datos enviados
         const formDataObject = {
-            title: formDataToSend.get('title') as string,
-            date: formDataToSend.get('date') as string,
+            title: formDataToSend.get('nombre') as string,
+            date: formDataToSend.get('fecha') as string,
             time: formDataToSend.get('time') as string,
-            location: formDataToSend.get('location') as string,
-            category: formDataToSend.get('category') as string,
-            description: formDataToSend.get('description') as string,
-            volunteersNeeded: formDataToSend.get('volunteersNeeded') as string,
-            requiredSkills: formDataToSend.get('requiredSkills') as string,
+            location: formDataToSend.get('lugar') as string,
+            category: formDataToSend.get('categoria') as string,
+            description: formDataToSend.get('descripcion') as string,
+            volunteersNeeded: formDataToSend.get('voluntarios_requeridos') as string,
+            requiredSkills: formDataToSend.get('organizador_id') as string,
             optionalSkills: formDataToSend.get('optionalSkills') as string,
             ageRequirement: formDataToSend.get('ageRequirement') as string,
             additionalRequirements: formDataToSend.get('additionalRequirements') as string,
-            tasks: JSON.parse(formDataToSend.get('tasks') as string),
-            image: formDataToSend.get('image') instanceof File 
-              ? (formDataToSend.get('image') as File).name 
-              : 'No image'
-          };
-        
-          console.log('📤 Datos a enviar:', formDataObject);
+            tasks: JSON.parse(formDataToSend.get('tareas') as string),
+            image: formDataToSend.get('image') instanceof File
+                ? (formDataToSend.get('image') as File).name
+                : 'No image'
+        };
+
+        console.log('📤 Datos a enviar:', formDataObject);
     };
 
     return (
