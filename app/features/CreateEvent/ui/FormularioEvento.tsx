@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import DropZone from "../infrastructure/DropZone";
-import TagsInput from "../infrastructure/TagsInput";
+import DropZone from "../ui/DropZone";
+import TagsInput from "../ui/TagsInput";
 import { CreateEventApi } from "../infrastructure/CreateEventApi";
 import type { Tag } from "react-tag-input";
+import { PostCreateEvent } from '../useCases/useCaseCreateEvent';
 
 export const FormularioEvento: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -55,8 +56,8 @@ export const FormularioEvento: React.FC = () => {
         }
 
         try {
-            const response = await CreateEventApi.createEvent(formDataToSend);
-            console.log('Evento creado:', response);
+             const result = await PostCreateEvent(formDataToSend);
+            console.log('Evento creado:', result);
         } catch (error) {
             console.error('Error al crear evento:', error);
         }

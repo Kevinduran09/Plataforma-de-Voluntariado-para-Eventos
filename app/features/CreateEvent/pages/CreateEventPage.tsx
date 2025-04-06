@@ -2,19 +2,7 @@ import React from 'react';
 import { FormularioEvento } from '../ui/FormularioEvento';
 import { Link, type ActionFunctionArgs } from 'react-router';
 
-export async function clientAction({ request }: ActionFunctionArgs) {
-        // Aquí puedes manejar la lógica de creación del evento
-        // Aqui se llamaria la API que se encarga de crear el evento
 
-        // const formData = await request.formData();
-        // const loginData = Object.fromEntries(formData);
-        // const result = await PostCreateEvent(loginData); // Llama a la función que maneja la creación del evento
-
-    
-        
-
-    //  return null; // retorna una accion Como redireccion o un error 
-}
 
 export default function CreateEventPage() {
     return (
