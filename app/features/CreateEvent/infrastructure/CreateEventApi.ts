@@ -6,15 +6,11 @@ export type CreateEventapiInterface = {
 
 
 export const CreateEventApi = {
- 
-    createEvent: async (data: any) => {
-        const response = await fetch('http://localhost:3000/eventos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        return response.json();
-    }
+  createEvent: async (formData: FormData) => {
+    const response = await fetch('http://localhost:3000/eventos', {
+      method: 'POST',
+      body: formData,
+    });
+    return response.json();
+  }
 }

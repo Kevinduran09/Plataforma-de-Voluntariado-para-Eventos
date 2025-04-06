@@ -10,17 +10,24 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.enter];
 
-const TagsInput: React.FC = () => {
+interface TagsInputProps {
+  onTagsChange: (tags: Tag[]) => void;
+}
+
+const TagsInput: React.FC<TagsInputProps> = ({ onTagsChange }) => {
   const [tags, setTags] = useState<Tag[]>([]);
 
   const handleAddition = (tag: Tag) => {
-    setTags([...tags, tag]);
+    const newTags = [...tags, tag];
+    setTags(newTags);
+    onTagsChange(newTags);
   };
 
   const handleDelete = (i: number) => {
-    setTags(tags.filter((_, index) => index !== i));
+    const newTags = tags.filter((_, index) => index !== i);
+    setTags(newTags);
+    onTagsChange(newTags);
   };
-
   return (
     <div className="mt-1 w-full" >
       <ReactTags
