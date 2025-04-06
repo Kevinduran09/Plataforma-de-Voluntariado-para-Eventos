@@ -23,8 +23,15 @@
     "screenshots": [
         {
             "src": "/screenshot.png",
-            "sizes": "1919x974",
-            "type": "image/png"
+            "sizes": "1080x548",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/screenshot.png",
+            "sizes": "1080x548",
+            "type": "image/png",
+            "form_factor": "narrow"
         }
       
     ]

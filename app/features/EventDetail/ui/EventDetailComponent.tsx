@@ -83,30 +83,45 @@ const EventDetailComponent: React.FC<{ event: Evento }> = ({ event }) => {
                 </ul>
             </div>
 
-            {/* Lista de tareas */}
-            <div>
-                <h2 className="text-2xl font-semibold">Tasks</h2>
-                <ul className="list-disc list-inside text-gray-700 mt-2">
-                    {event.tareas.map((task, index) => (
-                        <li key={index}>{task.nombre} - <span className={`${task.estado === 'completado' ? 'text-green-500' : 'text-red-500'}`}>{task.estado}</span></li>
-                    ))}
-                </ul>
+
+            {/* Tareas activas */}
+            <div className="mt-5">
+                <h2 className="text-2xl font-semibold border-l-4 border-l-green-500 pl-2">Tareas Pendientes</h2>
+                <div className=" p-4 rounded-lg  mt-3">
+                    <ul className="list-disc list-inside text-gray-800 ">
+                        {event.tareas?.filter(task => task.estado === 'pendiente').map((task, index) => (
+                            <li key={index} className="flex justify-between flex-wrap items-center py-2 border-b-2 shadow-2xs  pb-5 border-gray-300 ">
+                                <div className="flex-1">
+                                    <span>{task.nombre}</span>
+                                </div>
+                               <div>
+                                    <span className="bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{task.estado}</span>
+                                    <button className="ml-4 text-sm text-white bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-lg">Completar</button>
+                               </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
 
-            {/* Organizador */}
-            <div>
-                <h2 className="text-2xl font-semibold">Organizer</h2>
-                <div className="flex items-center mt-2">
-                    <img
-                        src="https://via.placeholder.com/50"
-                        alt="Organizer"
-                        className="w-12 h-12 rounded-full"
-                    />
-                    <div className="ml-4">
-                        <p className="font-semibold">Organizador {event.organizador_id}</p>
-                        <p className="text-gray-500">Un grande Pepe</p>
-                    </div>
+            {/* Tareas Completadas */}
+            <div className="mt-5">
+                <h2 className="text-2xl font-semibold border-l-4 border-l-red-500 pl-2">Tareas Completadas</h2>
+                <div className=" p-4 rounded-lg mt-3">
+                    <ul className="list-disc list-inside text-gray-800">
+                        {event.tareas?.filter(task => task.estado === 'completado').map((task, index) => (
+                            <li key={index} className="flex justify-between flex-wrap items-center py-2 order-b-2 border-b-2 shadow-2xs pb-5 border-gray-300 ">
+                                <span>{task.nombre}</span>
+                                <span className="bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{task.estado}</span>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
+            </div>
+            <div className='w-full'>
+                <button className="w-full text-white font-semibold bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-2xl text-sm px-5 py-3 text-center transition-all duration-150">
+                    Register for this event
+                </button>
             </div>
         </div>
     );

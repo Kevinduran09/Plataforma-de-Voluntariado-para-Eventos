@@ -22,7 +22,7 @@ export default function CreateEventPage() {
             <header>
                 <div>
                     <h2 className="p-3 text-gray-700 text-sm flex items-center space-x-2">
-                        <Link to={'/'} className="font-medium hover:underline"> Home</Link>
+                        <Link to={'/eventDashboard'} className="font-medium hover:underline"> Home</Link>
 
 
                         <span className="text-gray-500">›</span>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
-import DropZone from "../infrastructure/DropZone";
-import TagsInput from "../infrastructure/TagsInput";
+import DropZone from "./DropZone";
+import TagsInput from "./TagsInput";
 
 
 

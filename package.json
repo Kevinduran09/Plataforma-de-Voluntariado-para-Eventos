@@ -5,10 +5,10 @@
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
+    "start": "react-router-serve ",
     "typecheck": "react-router typegen && tsc",
     "feature": "node ./scripts/generateFeature.cjs",
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch db.json "
   },
   "dependencies": {
     "@react-router/node": "^7.3.0",
