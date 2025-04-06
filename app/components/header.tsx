@@ -27,7 +27,7 @@ export default function Header() {
         <header className="w-full flex items-center justify-between py-5 px-5 border-b-2 border-gray-200">
             {/* Logo */}
             <div className="w-full lg:w-auto flex flex-row justify-between lg:justify-center items-center gap-5 ">
-                <Link className="text-4xl font-semibold" to="/">
+                <Link className="text-4xl font-semibold" to="/eventDashboard">
                     <span className="text-black">Volunt</span>
                     <span className="text-green-500">Hub</span>
                 </Link>
@@ -78,7 +78,7 @@ export default function Header() {
                     >
                         <img
                             className="rounded-full w-10 h-10"
-                            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                            src={"https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"}
                             alt="Profile"
                         />
                     </Link>

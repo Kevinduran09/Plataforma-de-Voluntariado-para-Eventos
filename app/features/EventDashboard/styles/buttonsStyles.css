@@ -1,79 +1,80 @@
 /* Estilo para el botón de "Más Info" */
-#btnMasInfo {
+.btnMasInfo {
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #14ca69;
+  border-radius: 8px;
+  padding: 6px 16px;
+  margin-right: 10px;
+  font-size: 16px;
   
-    color: #ffffff; 
-    background-color: #14ca69; 
-    border-radius: 8px; 
-    padding: 6px 16px; 
-    margin-right: 10px; 
-    font-size: 16px; 
-    font-weight: 400;
-  }
-  
-  #btnMasInfo:hover {
-    background-color: #10b05b; 
-    color: white;
-  }
-  
-  /* Estilo para el botón de "Compartir" */
-  #btnCompartir {
-    border: 2px solid transparent;
-    color: #000000; 
-    background-color: transparent; 
-    border-radius: 8px; 
-    padding: 6px 16px; 
-    margin-right: 10px; 
-    font-size: 16px; 
-  }
-  
-  #btnCompartir:hover {
-    color: #38a169; 
-    background-color: transparent; 
-  }
-  
-  /* Estilo para el botón de "Ver Todos Mis Eventos" */
-  #btnVerTodos {
-    border: 2px solid #3b82f6;
-    color: #3b82f6; 
-    background-color: transparent;
-  }
-  
-  #btnVerTodos:hover {
-    background-color: #3b82f6; 
-    color: white; 
-  }
-  
- /* Estilo para el botón de "Direcciones" */
+}
+
+.btnMasInfo:hover {
+  background-color: #10b05b;
+  color: white;
+}
+
+/* Estilo para el botón de "Compartir" */
+.btnCompartir {
+  border: 2px solid transparent;
+  color: #01ad07;
+  background-color: #10b05b1f;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 6px 16px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.btnCompartir:hover {
+
+  background-color: #10b05b63;
+}
+
+/* Estilo para el botón de "Ver Todos Mis Eventos" */
+.btnVerTodos {
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
+  background-color: transparent;
+}
+
+
+.btnVerTodos:hover {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* Estilo para el botón de "Direcciones" */
 #btnDirecciones {
-    border: 2px solid #3b82f6;
-    color: #3b82f6; 
-    background-color: transparent; 
-    border-radius: 8px; 
-    padding: 6px 12px; 
-    margin-right: 10px; 
-    font-size: 16px;
-    text-decoration: none; 
-  }
-  
-  #btnDirecciones:hover {
-    background-color: #3b82f6; 
-    color: white; 
-  }
-  
-  /* Estilo para el botón de "Calendario" */
-  #btnCalendario {
-    border: 2px solid #3b82f6; 
-    color: #3b82f6; 
-    background-color: transparent; 
-    border-radius: 8px; 
-    padding: 6px 12px; 
-    margin-right: 10px; 
-    font-size: 16px; 
-    text-decoration: none;
-  }
-  
-  #btnCalendario:hover {
-    background-color: #3b82f6; 
-    color: white; 
-  }
-  
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin-right: 10px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+#btnDirecciones:hover {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* Estilo para el botón de "Calendario" */
+#btnCalendario {
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin-right: 10px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+#btnCalendario:hover {
+  background-color: #3b82f6;
+  color: white;
+}
