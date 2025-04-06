@@ -1,15 +1,94 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
-import DropZone from "./DropZone";
-import TagsInput from "./TagsInput";
+import DropZone from "../ui/DropZone";
+import TagsInput from "../ui/TagsInput";
+import { CreateEventApi } from "../infrastructure/CreateEventApi";
+import type { Tag } from "react-tag-input";
+import { PostCreateEvent } from '../useCases/useCaseCreateEvent';
+
+export const FormularioEvento: React.FC = () => {
+    const [formData, setFormData] = useState({
+        eventTitle: '',
+        date: '',
+        time: '',
+        location: '',
+        category: '',
+        description: '',
+        volunteersNeeded: '',
+        requiredSkills: '',
+        optionalSkills: '',
+        ageRequirement: '',
+        additionalRequirements: '',
+    });
+
+    const [tags, setTags] = useState<Tag[]>([]);
+    const [imageFile, setImageFile] = useState<File | null>(null);
+
+    const handleInputChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    ) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({ ...prev, [id]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const formDataToSend = new FormData();
+
+        // Agregar campos del formulario
+        formDataToSend.append('title', formData.eventTitle);
+        formDataToSend.append('date', formData.date);
+        formDataToSend.append('time', formData.time);
+        formDataToSend.append('location', formData.location);
+        formDataToSend.append('category', formData.category);
+        formDataToSend.append('description', formData.description);
+        formDataToSend.append('volunteersNeeded', formData.volunteersNeeded);
+        formDataToSend.append('requiredSkills', formData.requiredSkills);
+        formDataToSend.append('optionalSkills', formData.optionalSkills);
+        formDataToSend.append('ageRequirement', formData.ageRequirement);
+        formDataToSend.append('additionalRequirements', formData.additionalRequirements);
+        formDataToSend.append('tasks', JSON.stringify(tags.map(tag => tag.text)));
+
+        // Agregar imagen si existe
+        if (imageFile) {
+            formDataToSend.append('image', imageFile);
+        }
+
+        try {
+             const result = await PostCreateEvent(formDataToSend);
+            console.log('Evento creado:', result);
+        } catch (error) {
+            console.error('Error al crear evento:', error);
+        }
 
 
 
 
-export const FormularioEvento:React.FC =()=> {
-    // agregar la logica para capturar todos los datos del formulario y enviarlos a la api    
+        // datos enviados
+        const formDataObject = {
+            title: formDataToSend.get('title') as string,
+            date: formDataToSend.get('date') as string,
+            time: formDataToSend.get('time') as string,
+            location: formDataToSend.get('location') as string,
+            category: formDataToSend.get('category') as string,
+            description: formDataToSend.get('description') as string,
+            volunteersNeeded: formDataToSend.get('volunteersNeeded') as string,
+            requiredSkills: formDataToSend.get('requiredSkills') as string,
+            optionalSkills: formDataToSend.get('optionalSkills') as string,
+            ageRequirement: formDataToSend.get('ageRequirement') as string,
+            additionalRequirements: formDataToSend.get('additionalRequirements') as string,
+            tasks: JSON.parse(formDataToSend.get('tasks') as string),
+            image: formDataToSend.get('image') instanceof File 
+              ? (formDataToSend.get('image') as File).name 
+              : 'No image'
+          };
+        
+          console.log('📤 Datos a enviar:', formDataObject);
+    };
+
     return (
-        <form className="space-y-6 p-6 rounded-lg 00">
-
+        <form className="space-y-6 p-6 rounded-lg" onSubmit={handleSubmit}>
             <header>
                 <div>
                     <h1 className="text-2xl font-bold text-gray-800 text-left mb-4 p-3">
@@ -17,16 +96,19 @@ export const FormularioEvento:React.FC =()=> {
                     </h1>
                 </div>
             </header>
+
             {/* Título del Evento */}
             <div>
-                <label htmlFor="event_title" className="block text-sm font-medium text-gray-900">
+                <label htmlFor="eventTitle" className="block text-sm font-medium text-gray-900">
                     Título del Evento
                 </label>
                 <input
                     type="text"
-                    id="event_title"
+                    id="eventTitle"
+                    value={formData.eventTitle}
+                    onChange={handleInputChange}
                     placeholder="Ingrese el título del evento"
-                    className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900"
+                    className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                     required
                 />
             </div>
@@ -40,7 +122,9 @@ export const FormularioEvento:React.FC =()=> {
                     <input
                         type="date"
                         id="date"
-                        className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900"
+                        value={formData.date}
+                        onChange={handleInputChange}
+                        className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         required
                     />
                 </div>
@@ -51,7 +135,9 @@ export const FormularioEvento:React.FC =()=> {
                     <input
                         type="time"
                         id="time"
-                        className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900"
+                        value={formData.time}
+                        onChange={handleInputChange}
+                        className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         required
                     />
                 </div>
@@ -65,8 +151,10 @@ export const FormularioEvento:React.FC =()=> {
                 <input
                     type="text"
                     id="location"
+                    value={formData.location}
+                    onChange={handleInputChange}
                     placeholder="Ingrese la ubicación del evento"
-                    className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900"
+                    className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                     required
                 />
             </div>
@@ -78,11 +166,12 @@ export const FormularioEvento:React.FC =()=> {
                 </label>
                 <select
                     id="category"
-                    className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-700"
+                    value={formData.category}
+                    onChange={handleInputChange}
+                    className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-700"
                     required
-                    defaultValue={''} 
                 >
-                    <option value="" selected disabled className=''>Seleccione la categoría del evento</option>
+                    <option value="" disabled>Seleccione la categoría del evento</option>
                     <option value="conferencia">Conferencia</option>
                     <option value="taller">Taller</option>
                     <option value="seminario">Seminario web</option>
@@ -97,29 +186,29 @@ export const FormularioEvento:React.FC =()=> {
                 </label>
                 <textarea
                     id="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
                     placeholder="Describa su evento y las actividades a realizar"
-                    className="mt-1 w-full p-3  rounded-lg bg-gray-100 text-gray-900 h-24"
+                    className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900 h-24"
                     style={{ maxHeight: '200px', minHeight: "100px" }}
                     required
                 ></textarea>
             </div>
 
-
             {/* Componente drag and drop */}
             <div>
-                <label htmlFor="description" className="block text-sm font-medium text-gray-900">
+                <label className="block text-sm font-medium text-gray-900">
                     Imagen de portada para el evento
                 </label>
-                <DropZone onImageUpload={(imageUrl) => console.log(imageUrl)} />
+                <DropZone onImageUpload={(file) => setImageFile(file)} />
             </div>
 
-            {/* Titulo voluntatios */}
+            {/* Titulo voluntarios */}
             <div>
                 <h1 className="text-2xl font-bold text-gray-800 text-left mb-4 p-3">
                     Requisitos para los voluntarios
                 </h1>
             </div>
-
 
             <div className="space-y-4">
                 <label className="block text-sm font-medium text-gray-900">
@@ -127,6 +216,9 @@ export const FormularioEvento:React.FC =()=> {
                 </label>
                 <input
                     type="number"
+                    id="volunteersNeeded"
+                    value={formData.volunteersNeeded}
+                    onChange={handleInputChange}
                     min="1"
                     placeholder="Ej: 10"
                     className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
@@ -145,6 +237,9 @@ export const FormularioEvento:React.FC =()=> {
                         </label>
                         <input
                             type="text"
+                            id="requiredSkills"
+                            value={formData.requiredSkills}
+                            onChange={handleInputChange}
                             placeholder="Lista separada por comas"
                             className="w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         />
@@ -155,6 +250,9 @@ export const FormularioEvento:React.FC =()=> {
                         </label>
                         <input
                             type="text"
+                            id="optionalSkills"
+                            value={formData.optionalSkills}
+                            onChange={handleInputChange}
                             placeholder="Lista separada por comas"
                             className="w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         />
@@ -169,10 +267,13 @@ export const FormularioEvento:React.FC =()=> {
                 </label>
                 <div className="flex items-center space-x-4">
                     <select
+                        id="ageRequirement"
+                        value={formData.ageRequirement}
+                        onChange={handleInputChange}
                         className="p-3 rounded-lg bg-gray-100 text-gray-900"
                         required
                     >
-                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="" disabled>Seleccione una opción</option>
                         <option value="8+">Mayores de 8 años</option>
                         <option value="12+">Mayores de 12 años</option>
                         <option value="16+">Mayores de 16 años</option>
@@ -181,17 +282,14 @@ export const FormularioEvento:React.FC =()=> {
                     </select>
                 </div>
             </div>
-            
-             {/* Tarea a realizar (tag input) */}
-             <div>
-                <label htmlFor="description" className="block text-sm font-medium text-gray-900">
-                   Tareas a realizar
+
+            {/* Tarea a realizar (tag input) */}
+            <div>
+                <label className="block text-sm font-medium text-gray-900">
+                    Tareas a realizar
                 </label>
-                <TagsInput />
+                <TagsInput onTagsChange={setTags} />
             </div>
-
-
-
 
             {/* Requisitos adicionales */}
             <div className="space-y-4">
@@ -199,6 +297,9 @@ export const FormularioEvento:React.FC =()=> {
                     Requisitos adicionales
                 </label>
                 <textarea
+                    id="additionalRequirements"
+                    value={formData.additionalRequirements}
+                    onChange={handleInputChange}
                     placeholder="Ej: Certificación en primeros auxilios, disponibilidad los fines de semana..."
                     className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 min-h-[100px]"
                     style={{ maxHeight: '200px', minHeight: "100px" }}
@@ -206,11 +307,8 @@ export const FormularioEvento:React.FC =()=> {
                 />
             </div>
 
-
             {/* Botones */}
             <div className="grid grid-cols-2 gap-6">
-
-                {/* Botón de cancelar */}
                 <div>
                     <Link to="/">
                         <button
@@ -222,17 +320,13 @@ export const FormularioEvento:React.FC =()=> {
                     </Link>
                 </div>
 
-
-
                 <div className="flex gap-4 ml-auto">
-                    {/* Botón de guardar */}
                     <button
                         type="submit"
                         className="w-400px p-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition mr-4"
                     >
                         Guardar Evento
                     </button>
-                    {/* Botón de publicar */}
                     <button
                         type="submit"
                         className="w-400px p-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition"
@@ -240,9 +334,7 @@ export const FormularioEvento:React.FC =()=> {
                         Publicar Evento
                     </button>
                 </div>
-
             </div>
-
-        </form >
+        </form>
     );
-}
+};

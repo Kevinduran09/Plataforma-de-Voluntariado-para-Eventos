@@ -16,6 +16,8 @@ export const CreateEventApi = {
             },
             body: JSON.stringify(data),
         });
+        console.log(response)
+        
         return response.json();
     },
     UploadImage: async(file:File)=>{

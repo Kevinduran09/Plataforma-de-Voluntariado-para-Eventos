@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface DropZoneProps {
-  onImageUpload: (imageUrl: string) => void;
+  onImageUpload: (file: File) => void; 
 }
 
 export default function DropZone({ onImageUpload }: DropZoneProps) {
@@ -12,7 +12,7 @@ export default function DropZone({ onImageUpload }: DropZoneProps) {
     const file = acceptedFiles[0];
     const imageUrl = URL.createObjectURL(file);
     setImagen(imageUrl);
-    onImageUpload(imageUrl);
+    onImageUpload(file); 
   }, [onImageUpload]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
