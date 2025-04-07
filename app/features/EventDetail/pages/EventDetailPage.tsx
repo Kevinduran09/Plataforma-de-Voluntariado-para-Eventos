@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router';
 import EventDetailComponent from '../ui/EventDetailComponent';
-import { GetEventDetail } from '../useCases/useCaseEventDetail';
+import { GetEventDetail, isUserSubscribed } from '../useCases/useCaseEventDetail';
 import type { Evento } from '~/features/EventDashboard/domain/EventDashboard';
+import useAuthStore from '~/store/useAuthStore';
 
 export async function clientLoader({ params }: { params: { id: string } }) {
     if (!params.id) {
@@ -13,7 +14,18 @@ export async function clientLoader({ params }: { params: { id: string } }) {
         if (!data) {
             throw new Response('Evento no encontrado', { status: 404 });
         }
-        return { data };
+
+        const user = useAuthStore.getState().user;
+        if (!user) {
+            throw new Response('Usuario no autenticado', { status: 401 });
+        }
+        if(!user.id) {
+            return { data: data, isSub: false };
+        }
+        const isSub: boolean = await isUserSubscribed(user.id, data.id);
+        console.log('Usuario:', user.id, 'Evento:', data.id, 'Suscrito:', isSub);
+        
+        return { data:data,isSub };
     } catch (error) {
         console.error('Error al cargar el evento:', error);
         throw new Response('Error al cargar el evento', { status: 500 });
@@ -21,7 +33,7 @@ export async function clientLoader({ params }: { params: { id: string } }) {
 }
 
 export default function EventDetailPage() {
-    const { data } = useLoaderData<{ data: Evento }>();
+    const { data,isSub } = useLoaderData<{ data: Evento,isSub:boolean }>();
 
     return (
         <div className="container mx-auto max-w-4xl px-3 mt-10">
@@ -34,7 +46,7 @@ export default function EventDetailPage() {
                     </h2>
                 </div>
             </header>
-            <EventDetailComponent event={data} />
+            <EventDetailComponent event={data} isSubscrited={isSub} />
         </div>
     );
 }

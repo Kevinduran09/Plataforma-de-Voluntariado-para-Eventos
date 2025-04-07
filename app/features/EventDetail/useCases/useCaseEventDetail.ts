@@ -6,7 +6,7 @@ export const GetEventDetail = async (id: string) => {
     return repository.getData(id);
 };
 
-export const SubscribeEventDetail = async (data: any) => {
+export const isUserSubscribed = async (userId: string, eventId: string) => {
     const repository = new EventDetailRepository(EventDetailApi);
-    return repository.subscribe(data);
+    return repository.Issubscribe(userId,eventId);
 };

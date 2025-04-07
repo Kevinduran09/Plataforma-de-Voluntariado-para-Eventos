@@ -84,8 +84,8 @@ export default function Header() {
                     </Link>
                 </div>
             ) : (
-                <Link to="/login" className="font-medium text-green-600 text-xl mr-5">
-                    Iniciar Sesion
+                    <Link to="/login" className="font-semibold text-green-500 mr-5">
+                    INICIAR SESIÓN
                 </Link>
             )}
 
