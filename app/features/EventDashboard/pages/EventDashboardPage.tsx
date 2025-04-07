@@ -19,11 +19,7 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export async function clientLoader() {
-  // const response = await GetEventDashboard();
 
-  // if (!response) {
-  //   throw new Response("Error al cargar los eventos", { status: 500 });
-  // }
   const eventos = [
     {
       id: "1",
