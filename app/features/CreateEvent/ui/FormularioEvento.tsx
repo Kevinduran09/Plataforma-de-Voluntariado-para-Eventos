@@ -72,7 +72,7 @@ export const FormularioEvento: React.FC = () => {
         } */
 
         try {
-            const result = await PostCreateEvent(formDataToSend);
+            const result = await PostCreateEvent(Object.fromEntries(formDataToSend));
             console.log('Evento creado:', result);
         } catch (error) {
             console.error('Error al crear evento:', error);
@@ -104,7 +104,7 @@ export const FormularioEvento: React.FC = () => {
     };
 
     return (
-        <form className="space-y-6 p-6 rounded-lg" onSubmit={handleSubmit}>
+        <div className="space-y-6 p-6 rounded-lg" >
             <header>
                 <div>
                     <h1 className="text-2xl font-bold text-gray-800 text-left mb-4 p-3">
@@ -130,7 +130,7 @@ export const FormularioEvento: React.FC = () => {
             </div>
 
             {/* Fecha y Hora */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 ">
                 <div>
                     <label htmlFor="date" className="block text-sm font-medium text-gray-900">
                         Fecha
@@ -326,7 +326,7 @@ export const FormularioEvento: React.FC = () => {
             {/* Botones */}
             <div className="grid grid-cols-2 gap-6">
                 <div>
-                    <Link to="/">
+                    <Link to="/eventDashboard">
                         <button
                             type="button"
                             className="w-400px p-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-800 transition"
@@ -337,20 +337,15 @@ export const FormularioEvento: React.FC = () => {
                 </div>
 
                 <div className="flex gap-4 ml-auto">
+                 
                     <button
-                        type="submit"
-                        className="w-400px p-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition mr-4"
-                    >
-                        Guardar Evento
-                    </button>
-                    <button
-                        type="submit"
+                        onClick={handleSubmit}
                         className="w-400px p-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition"
                     >
                         Publicar Evento
                     </button>
                 </div>
             </div>
-        </form>
+        </div>
     );
 };

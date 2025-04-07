@@ -81,28 +81,7 @@
           "estado": "pendiente"
         }
       ]
-    },
-    {
-      "id": "69c1",
-      "title": "Limpieza de Playa",
-      "date": "2025-04-20",
-      "time": "09:00",
-      "location": "Playa del Sol",
-      "category": "Medio Ambiente",
-      "description": "Un evento para limpiar la playa y crear conciencia ambiental.",
-      "volunteersNeeded": 20,
-      "requiredSkills": "Trabajo en equipo, limpieza",
-      "optionalSkills": "Primeros auxilios",
-      "ageRequirement": "18+",
-      "additionalRequirements": "Llevar guantes y protector solar",
-      "tasks": [
-        "Recolectar basura",
-        "Separar reciclables",
-        "Asistir a voluntarios"
-      ],
-      "image": "base64string_or_filename.jpg"
-    },
-
+    }
   ],
   "inscripciones": [
     {

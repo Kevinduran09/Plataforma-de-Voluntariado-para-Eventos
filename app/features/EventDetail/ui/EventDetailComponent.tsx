@@ -1,7 +1,8 @@
 import React from 'react';
 import type { Evento } from '~/features/EventDashboard/domain/EventDashboard';
+import { EventTasks } from './EventTask';
 
-const EventDetailComponent: React.FC<{ event: Evento }> = ({ event }) => {
+const EventDetailComponent: React.FC<{ event: Evento, isSubscrited:boolean}> = ({ event, isSubscrited }) => {
     return (
         <div className="flex flex-col gap-8 px-4 py-6">
             {/* Título del evento */}
@@ -84,8 +85,8 @@ const EventDetailComponent: React.FC<{ event: Evento }> = ({ event }) => {
             </div>
 
 
-            {/* Tareas activas */}
-            <div className="mt-5">
+            <EventTasks tareas={event.tareas} isUserSubscribed={isSubscrited} />
+            {/* <div className="mt-5">
                 <h2 className="text-2xl font-semibold border-l-4 border-l-green-500 pl-2">Tareas Pendientes</h2>
                 <div className=" p-4 rounded-lg  mt-3">
                     <ul className="list-disc list-inside text-gray-800 ">
@@ -104,7 +105,7 @@ const EventDetailComponent: React.FC<{ event: Evento }> = ({ event }) => {
                 </div>
             </div>
 
-            {/* Tareas Completadas */}
+           
             <div className="mt-5">
                 <h2 className="text-2xl font-semibold border-l-4 border-l-red-500 pl-2">Tareas Completadas</h2>
                 <div className=" p-4 rounded-lg mt-3">
@@ -117,7 +118,7 @@ const EventDetailComponent: React.FC<{ event: Evento }> = ({ event }) => {
                         ))}
                     </ul>
                 </div>
-            </div>
+            </div> */}
             <div className='w-full'>
                 <button className="w-full text-white font-semibold bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-2xl text-sm px-5 py-3 text-center transition-all duration-150">
                     Register for this event

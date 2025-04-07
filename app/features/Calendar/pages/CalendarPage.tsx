@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarComponent from '../ui/CalendarComponent';
+import WorkInProgress from '~/components/WorkInProgress';
 
 export async function clientLoader() {
     // Logica de consulta de datos
@@ -8,7 +9,7 @@ export async function clientLoader() {
 export default function CalendarPage() {
     return (
         <div>
-            <CalendarComponent />
+            <WorkInProgress />
         </div>
     );
 }

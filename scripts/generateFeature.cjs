@@ -99,7 +99,7 @@ const generateFeature = (featureName) => {
     const updatedRoutesArrayText = routesArrayText.replace(/\s*$/, `,\n  ${newRoute}`);
 
     // 5. Reconstruir el código actualizado
-    const updatedRoutesText = `import { type RouteConfig, index, route } from "@react-router/dev/routes";\n\nexport default [\n  ${updatedRoutesArrayText}\n] satisfies RouteConfig;\n`;
+    const updatedRoutesText = `import { type RouteConfig, index, route,layout } from "@react-router/dev/routes";\n\nexport default [\n  ${updatedRoutesArrayText}\n] satisfies RouteConfig;\n`;
 
     // 6. Escribir el archivo actualizado
     fs.writeFileSync(routepath, updatedRoutesText, 'utf-8');

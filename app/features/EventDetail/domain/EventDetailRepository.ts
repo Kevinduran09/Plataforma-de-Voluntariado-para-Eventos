@@ -21,8 +21,12 @@ class EventDetailRepository {
     return data as Evento;
   }
 
-  async subscribe(data: any) {
-    // Lógica para suscribirse
+  async Issubscribe(idUser: string, idEvent: string){
+    const data = await this.api?.isSubscribe(idEvent, idUser)
+    if (!data) {
+      throw new Error('Error al verificar la suscripción');
+    }
+    return data.length > 0 ? true : false;
   }
 }
 export default EventDetailRepository;
