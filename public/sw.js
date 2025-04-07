@@ -1,3 +1,4 @@
+
 const CACHE_DYNAMIC_NAME = 'volunatarios-cache'; 
 
 self.addEventListener('install', event => {
