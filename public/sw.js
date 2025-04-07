@@ -1,67 +1,64 @@
-const CACHE_NAME = 'pwa-cache-v1';
-const API_CACHE_NAME = 'api-cache-v1';
-const urlsToCache = [
-    '/',
-    '/public/pngtree-settings-line-black-icon-png-image_3767553.jpg',
-    '/public/volunteering-animate.svg',
-    '/public/NotFount.svg',
-    '/createevent',
-];
+const CACHE_DYNAMIC_NAME = 'volunatarios-cache'; 
 
-// Instalar el Service Worker y cachear archivos estáticos
-self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(urlsToCache);
-        })
-    );
+self.addEventListener('install', event => {
+    console.log('Service Worker instalado');
 });
 
-// Estrategia Network First para /eventos/
-const networkFirst = async (request) => {
-    try {
-        // Primero intentamos obtener del servidor
-        const networkResponse = await fetch(request);
 
-        // Si la respuesta es válida, actualizamos el caché
-        if (networkResponse.ok) {
-            const cache = await caches.open(API_CACHE_NAME);
-            await cache.put(request, networkResponse.clone());
-        }
-        return networkResponse;
-    } catch (error) {
-        // Si falla la red, buscamos en caché
-        const cachedResponse = await caches.match(request);
-        return cachedResponse || Response.error();
+self.addEventListener('fetch', event => {
+    // Redirige a la lógica de caché con red
+    if (event.request.url.startsWith('chrome-extension://')) {
+        return; // No hacer nada si la solicitud es de una extensión de Chrome
     }
-};
-
-// Interceptar peticiones
-self.addEventListener('fetch', (event) => {
-    const url = new URL(event.request.url);
-
-    // Aplicar estrategia network-first solo para rutas /eventos/
-    if (url.pathname.startsWith('/eventos/')) {
-        event.respondWith(networkFirst(event.request));
-    } else {
-        // Para otros recursos, usar cache-first como antes
-        event.respondWith(
-            caches.match(event.request).then((response) => {
-                return response || fetch(event.request);
-            })
-        );
-    }
+    event.respondWith(handleFetch(event));
 });
 
-// Activar el Service Worker y limpiar caché antigua
-self.addEventListener('activate', (event) => {
-    event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames
-                    .filter((cache) => cache !== CACHE_NAME && cache !== API_CACHE_NAME)
-                    .map((cache) => caches.delete(cache))
-            );
+// Maneja las solicitudes con caché y red
+async function handleFetch(event) {
+    const request = event.request;
+    // console.log(request);
+    
+    let response = await fetch(request)
+        .then(res => {
+            
+            
+            if (!res) {
+                
+                
+                // Si no hay respuesta, intenta obtenerla desde la caché
+                return caches.match(request);
+            }
+            // Si hay respuesta de la API, la guardamos en la caché
+            caches.open(CACHE_DYNAMIC_NAME).then(cache => {
+                  
+
+
+                    
+                    cache.put(request, res); // Guarda la respuesta en caché
+                    clearCache(CACHE_DYNAMIC_NAME, 150); // Limita la cantidad de elementos en la caché
+                
+               
+            });
+            return res.clone(); // Devolvemos la respuesta original
         })
-    );
-});
+        .catch(async () => {
+            // Si la API no responde, intenta con la caché
+            return caches.match(request);
+        });
+
+    return response;
+}
+
+// Limita la cantidad de elementos en la caché
+function clearCache(cacheName, maxItems) {
+    caches.open(cacheName)
+        .then(cache => {
+            cache.keys().then(keys => {
+                if (keys.length > maxItems) {
+                    cache.delete(keys[0]).then(() => {
+                        clearCache(cacheName, maxItems); // Recursivo para limpiar los más antiguos
+                    });
+                }
+            });
+        });
+}
