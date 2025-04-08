@@ -14,7 +14,7 @@ class EventDetailRepository {
   }
 
   async getData(id: string): Promise<Evento> {
-    const data = await this.api?.fetchData(`http://localhost:3000/eventos/${id}`);
+    const data = await this.api?.fetchData(id);
     if (!data) {
       throw new Error('Evento no encontrado');
     }
