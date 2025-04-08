@@ -81,6 +81,34 @@
           "estado": "pendiente"
         }
       ]
+    },
+    {
+      "id": "a9b3",
+      "categoria": "conferencia",
+      "nombre": "Sembradero de mota",
+      "descripcion": "Sembradero de mota para toda la U",
+      "fecha": "2025-04-03",
+      "lugar": "Universidad Nacional Region chorotega",
+      "voluntarios_requeridos": "300",
+      "organizador_id": "2",
+      "tareas": [
+        {
+          "nombre": "Clasificar residuos",
+          "estado": "pendiente"
+        }
+      ]
+    },
+    {
+      "id": "1aa4",
+      "categoria": "conferencia",
+      "nombre": "Sembradero de mota",
+      "descripcion": "Sembradero de mota para toda la U",
+      "fecha": "2025-04-03",
+      "lugar": "Universidad Nacional Region chorotega",
+      "voluntarios_requeridos": "300",
+      "organizador_id": "2"
+     
+     
     }
   ],
   "inscripciones": [
