@@ -3,6 +3,10 @@ export type CreateEventapiInterface = {
     createEvent: (data: any) => Promise<any>;
 };
 
+const API_URL =
+    import.meta.env.VITE_PRODUCCION === "production"
+        ? import.meta.env.VITE_API_URL_PRODUCCION
+        : "http://localhost:3000";
 
 
 export const CreateEventApi = {
@@ -10,7 +14,7 @@ export const CreateEventApi = {
     createEvent: async (data: any) => {
         console.log(data);
         
-        const response = await fetch('http://localhost:3000/eventos', {
+        const response = await fetch(`${API_URL}/eventos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
