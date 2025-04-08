@@ -28,19 +28,19 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/sw.js")
-        .then((registration) => {
-          console.log("Service Worker registrado con éxito:", registration);
+  // useEffect(() => {
+  //   if ("serviceWorker" in navigator) {
+  //     navigator.serviceWorker
+  //       .register("/sw.js")
+  //       .then((registration) => {
+  //         console.log("Service Worker registrado con éxito:", registration);
 
-        })
-        .catch((error) => {
-          console.error("Error al registrar el Service Worker:", error);
-        });
-    }
-  }, [])
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error al registrar el Service Worker:", error);
+  //       });
+  //   }
+  // }, [])
 
   return (
     <html lang="en">
@@ -48,7 +48,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="/manifest.json" />
-
         <link rel="icon" href="/volunthub-192x192.png" />
 
 
@@ -66,12 +65,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((registration) => {
+          console.log("Service Worker registrado con éxito:", registration);
 
+        })
+        .catch((error) => {
+          console.error("Error al registrar el Service Worker:", error);
+        });
+    }
+  }, [])
   return (
     <>
-      <ServiceWorker />
+
       <Outlet />
-   
+
     </>
   )
 }

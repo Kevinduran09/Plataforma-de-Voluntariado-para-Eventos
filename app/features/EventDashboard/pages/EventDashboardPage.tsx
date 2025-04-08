@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router";
+import { use, useEffect, useState } from "react";
+import { data, useLoaderData, useNavigate } from "react-router";
 import '../styles/buttonsStyles.css';
 import '../styles/eventStyle.css';
 import type { Route } from '.react-router/types/app/+types/root';
@@ -21,30 +21,43 @@ export function meta({ }: Route.MetaArgs) {
 
 export async function clientLoader() {
 
-  const response = await GetEventDashboard();
-
-  if (!response) {
-    throw new Response("Error al cargar los eventos", { status: 500 });
+  try {
+    const response = await GetEventDashboard();
+    const user = useAuthStore.getState().user;
+    return { data: response, user: user }
+  
+  } catch (error) {
+    console.log(error);
+    const user = useAuthStore.getState().user;
+    return { data: [], status: 500,user:user }
   }
-  const user = useAuthStore.getState().user;
-  return { data: response, user: user }
+  
+  
+  
 }
 
 
 
 export default function EventDashboardPage() {
 
-  const { data: eventos, user } = useLoaderData<{ data: Evento[], user: userInterface }>();
+  const { data: eventos, user, status } = useLoaderData<{ data: Evento[], user: userInterface, status: number | undefined }>();
 
-
+  console.log(eventos.length,status);
+  
 
   return (
     <div className="max-w-7xl mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4">Eventos Cercanos</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {eventos.map((evento) => (
-          <EventCard evento={evento} />
-        ))}
+        {
+          eventos.length === 0 && status === 500 ? (
+            <p>No hay eventos disponibles.</p>
+          ) : (
+            eventos.map((evento) => (
+              <EventCard key={evento.id} evento={evento} />
+            ))
+          )
+        }
       </div>
 
       {user.id ? (

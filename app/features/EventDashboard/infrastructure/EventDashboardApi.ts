@@ -5,7 +5,7 @@ const API_URL =
 
 export const EventDashboardApi = {
     getInfo: async () => {
-        const response = await fetch(`${API_URL}/eventos/`);
+        const response = await fetch(`${API_URL}/eventos`);
         return response.json();
     },
     getEventsByUser: async (userId: string)=>{

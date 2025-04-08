@@ -1,5 +1,5 @@
 
-const CACHE_DYNAMIC_NAME = 'volunatarios-cache'; 
+const CACHE_DYNAMIC_NAME = 'volunatarios-cache';
 
 self.addEventListener('install', event => {
     console.log('Service Worker instalado');
@@ -18,27 +18,27 @@ self.addEventListener('fetch', event => {
 async function handleFetch(event) {
     const request = event.request;
     // console.log(request);
-    
+
     let response = await fetch(request)
         .then(res => {
-            
-            
+
+
             if (!res) {
-                
-                
+
+
                 // Si no hay respuesta, intenta obtenerla desde la caché
                 return caches.match(request);
             }
             // Si hay respuesta de la API, la guardamos en la caché
             caches.open(CACHE_DYNAMIC_NAME).then(cache => {
-                  
 
 
-                    
-                    cache.put(request, res); // Guarda la respuesta en caché
-                    clearCache(CACHE_DYNAMIC_NAME, 150); // Limita la cantidad de elementos en la caché
-                
-               
+
+
+                cache.put(request, res); // Guarda la respuesta en caché
+                clearCache(CACHE_DYNAMIC_NAME, 150); // Limita la cantidad de elementos en la caché
+
+
             });
             return res.clone(); // Devolvemos la respuesta original
         })
