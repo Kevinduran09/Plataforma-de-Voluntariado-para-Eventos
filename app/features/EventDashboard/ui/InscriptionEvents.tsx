@@ -19,7 +19,7 @@ export default function InscriptionEvents() {
             }
 
             try {
-                const events = (await GetInscriptionEvents('2')) || [];
+                const events = (await GetInscriptionEvents(user.id)) || [];
                 console.log(events);
 
                 setEventsInscription(events);
@@ -43,7 +43,7 @@ export default function InscriptionEvents() {
                         <h2 className="text-2xl font-bold mt-8 mb-4">Mis Eventos Registrados</h2>
                         <div className="bg-white rounded-lg p-4">
 
-                            <ul>
+                            <ul className='flex flex-col'>
                                 {
                                     eventsInscription.map((evento, index) => (
                                         <ItemPillComponent key={index} index={index} evento={evento} />

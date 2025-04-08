@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 import type { userInterface } from "~/features/login/domain/login";
 type store = {
     isAuth: boolean
@@ -7,9 +8,9 @@ type store = {
 }
 
 
-const useAuthStore = create<store>()((set) => ({
+const useAuthStore = create<store>()(persist((set) => ({
     isAuth: false,
-    user:{
+    user: {
         contrasena: "",
         correo: "",
         id: "",
@@ -17,10 +18,15 @@ const useAuthStore = create<store>()((set) => ({
         nombre: "",
         numero_contacto: ""
     },
-    setAuth: (user) => set((state) => ({
+    setAuth: (user) => set(() => ({
         user: user,
         isAuth: true
     }))
-}))
+}),
+    {
+        name:'auth-store',
+        storage: createJSONStorage(()=>localStorage)
+    }
+))
 
 export default useAuthStore

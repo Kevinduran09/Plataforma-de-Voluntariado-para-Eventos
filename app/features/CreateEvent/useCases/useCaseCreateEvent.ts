@@ -1,6 +1,7 @@
+import type { typeEventSchema } from '../domain/CreateEvent';
 import CreateEventRepository from '../domain/CreateEventRepository';
 import {CreateEventApi} from '../infrastructure/CreateEventApi'
-export const PostCreateEvent = async (data:any) => {
+export const PostCreateEvent = async (data:typeEventSchema) => {
     const repository = new CreateEventRepository(CreateEventApi);
     return repository.postData(data);
 };

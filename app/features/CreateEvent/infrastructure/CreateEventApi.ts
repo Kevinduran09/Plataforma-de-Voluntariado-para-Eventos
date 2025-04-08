@@ -1,6 +1,7 @@
+import type { typeEventSchema } from "../domain/CreateEvent";
 
 export type CreateEventapiInterface = {
-    createEvent: (data: any) => Promise<any>;
+    createEvent: (data: typeEventSchema) => Promise<any>;
 };
 
 const API_URL =
@@ -11,7 +12,7 @@ const API_URL =
 
 export const CreateEventApi = {
  
-    createEvent: async (data: any) => {
+    createEvent: async (data: typeEventSchema) => {
         console.log(data);
         
         const response = await fetch(`${API_URL}/eventos`, {

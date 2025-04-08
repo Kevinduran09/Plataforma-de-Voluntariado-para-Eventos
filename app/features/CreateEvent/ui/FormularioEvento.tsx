@@ -1,108 +1,41 @@
-import { useState } from 'react';
 import { Link } from 'react-router';
 import DropZone from "../ui/DropZone";
 import TagsInput from "../ui/TagsInput";
-import { CreateEventApi } from "../infrastructure/CreateEventApi";
-import type { Tag } from "react-tag-input";
 import { PostCreateEvent } from '../useCases/useCaseCreateEvent';
 import useAuthStore from '~/store/useAuthStore';
+import { eventSchema, type typeEventSchema } from '../domain/CreateEvent';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useToast } from '~/store/useToastStore';
+
+
 
 export const FormularioEvento: React.FC = () => {
-    const [formData, setFormData] = useState({
-        eventTitle: '',
-        date: '',
-        time: '',
-        location: '',
-        category: '',
-        description: '',
-        volunteersNeeded: '',
-        requiredSkills: '',
-        optionalSkills: '',
-        ageRequirement: '',
-        additionalRequirements: '',
-        organizador_id: ''
-    });
+    const {openToast} =useToast()
     const { user } = useAuthStore()
-    const [tags, setTags] = useState<Tag[]>([]);
-    const [imageFile, setImageFile] = useState<File | null>(null);
-
-    const handleInputChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-    ) => {
-        const { id, value } = e.target;
-        setFormData(prev => ({ ...prev, [id]: value }));
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        const formDataToSend = new FormData();
-
-        // Agregar campos del formulario
-        formDataToSend.append('categoria', formData.category);
-        formDataToSend.append('nombre', formData.eventTitle);
-        formDataToSend.append('descripcion', formData.description);
-        formDataToSend.append('fecha', formData.date);
-        formDataToSend.append('lugar', formData.location);
-        formDataToSend.append('voluntarios_requeridos', formData.volunteersNeeded);
-
-        formDataToSend.append("organizador_id", user.id);
-
-        formDataToSend.append('tareas',
-            JSON.stringify(
-                tags.map(tag => ({
-                    nombre: tag.text,
-                    estado: 'pendiente'
-                }))
-            ));
-        //formDataToSend.append('time', formData.time);
-
-        /* 
-         formDataToSend.append('requiredSkills', formData.requiredSkills);
-         formDataToSend.append('optionalSkills', formData.optionalSkills);
-         formDataToSend.append('ageRequirement', formData.ageRequirement);
-         formDataToSend.append('additionalRequirements', formData.additionalRequirements);
-          */
-
-
-        // Agregar imagen si existe
-
-        /* if (imageFile) {
-            formDataToSend.append('image', imageFile);
-        } */
-
-        try {
-            const result = await PostCreateEvent(Object.fromEntries(formDataToSend));
-            console.log('Evento creado:', result);
-        } catch (error) {
-            console.error('Error al crear evento:', error);
+    const { register, handleSubmit, formState: { errors }, setValue, control } = useForm<typeEventSchema>({
+        resolver: zodResolver(eventSchema),
+        defaultValues: {
+            tareas: [],
+            organizador_id:user.id
         }
+    })
 
 
-
-
-        // datos enviados
-        const formDataObject = {
-            title: formDataToSend.get('nombre') as string,
-            date: formDataToSend.get('fecha') as string,
-            time: formDataToSend.get('time') as string,
-            location: formDataToSend.get('lugar') as string,
-            category: formDataToSend.get('categoria') as string,
-            description: formDataToSend.get('descripcion') as string,
-            volunteersNeeded: formDataToSend.get('voluntarios_requeridos') as string,
-            requiredSkills: formDataToSend.get('organizador_id') as string,
-            optionalSkills: formDataToSend.get('optionalSkills') as string,
-            ageRequirement: formDataToSend.get('ageRequirement') as string,
-            additionalRequirements: formDataToSend.get('additionalRequirements') as string,
-            tasks: JSON.parse(formDataToSend.get('tareas') as string),
-            image: formDataToSend.get('image') instanceof File
-                ? (formDataToSend.get('image') as File).name
-                : 'No image'
-        };
-
-        console.log('📤 Datos a enviar:', formDataObject);
+    const onSubmit = async (data: typeEventSchema) => {
+        
+        
+        try {
+            const result = await PostCreateEvent(data);
+            
+            if(result){
+                openToast('Evento publicado',`El evento ${data.titulo} se publico`)
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
-
+  
     return (
         <div className="space-y-6 p-6 rounded-lg" >
             <header>
@@ -121,12 +54,15 @@ export const FormularioEvento: React.FC = () => {
                 <input
                     type="text"
                     id="eventTitle"
-                    value={formData.eventTitle}
-                    onChange={handleInputChange}
+
+                    {...register('titulo')}
                     placeholder="Ingrese el título del evento"
                     className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
-                    required
+
                 />
+                {errors.titulo && (
+                    <p className="text-red-500 text-sm mt-1">{errors.titulo.message}</p>
+                )}
             </div>
 
             {/* Fecha y Hora */}
@@ -138,11 +74,13 @@ export const FormularioEvento: React.FC = () => {
                     <input
                         type="date"
                         id="date"
-                        value={formData.date}
-                        onChange={handleInputChange}
+                        {...register('fecha')}
                         className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         required
                     />
+                    {errors.fecha && (
+                        <p className="text-red-500 text-sm mt-1">{errors.fecha.message}</p>
+                    )}
                 </div>
                 <div>
                     <label htmlFor="time" className="block text-sm font-medium text-gray-900">
@@ -151,11 +89,15 @@ export const FormularioEvento: React.FC = () => {
                     <input
                         type="time"
                         id="time"
-                        value={formData.time}
-                        onChange={handleInputChange}
+                        min={'07:00'}
+                        max={'19:30'}
+                        {...register('hora')}
                         className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         required
                     />
+                    {errors.hora && (
+                        <p className="text-red-500 text-sm mt-1">{errors.hora.message}</p>
+                    )}
                 </div>
             </div>
 
@@ -167,12 +109,14 @@ export const FormularioEvento: React.FC = () => {
                 <input
                     type="text"
                     id="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
+                    {...register('ubicacion')}
                     placeholder="Ingrese la ubicación del evento"
                     className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                     required
                 />
+                {errors.ubicacion && (
+                    <p className="text-red-500 text-sm mt-1">{errors.ubicacion.message}</p>
+                )}
             </div>
 
             {/* Categoría */}
@@ -182,17 +126,19 @@ export const FormularioEvento: React.FC = () => {
                 </label>
                 <select
                     id="category"
-                    value={formData.category}
-                    onChange={handleInputChange}
+                    {...register('categoria')}
                     className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-700"
-                    required
+
                 >
-                    <option value="" disabled>Seleccione la categoría del evento</option>
+                    <option value="" selected disabled>Seleccione la categoría del evento</option>
                     <option value="conferencia">Conferencia</option>
                     <option value="taller">Taller</option>
                     <option value="seminario">Seminario web</option>
                     <option value="otro">Otro</option>
                 </select>
+                {errors.categoria && (
+                    <p className="text-red-500 text-sm mt-1">{errors.categoria.message}</p>
+                )}
             </div>
 
             {/* Descripción */}
@@ -202,13 +148,15 @@ export const FormularioEvento: React.FC = () => {
                 </label>
                 <textarea
                     id="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
+                    {...register('descripcion')}
                     placeholder="Describa su evento y las actividades a realizar"
                     className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900 h-24"
                     style={{ maxHeight: '200px', minHeight: "100px" }}
                     required
                 ></textarea>
+                {errors.descripcion && (
+                    <p className="text-red-500 text-sm mt-1">{errors.descripcion.message}</p>
+                )}
             </div>
 
             {/* Componente drag and drop */}
@@ -216,14 +164,14 @@ export const FormularioEvento: React.FC = () => {
                 <label className="block text-sm font-medium text-gray-900">
                     Imagen de portada para el evento
                 </label>
-                <DropZone onImageUpload={(file) => setImageFile(file)} />
+                <DropZone onImageUpload={(file) => setValue('imagen', file)} />
             </div>
 
             {/* Titulo voluntarios */}
             <div>
-                <h1 className="text-2xl font-bold text-gray-800 text-left mb-4 p-3">
+                <h2 className="text-2xl font-bold text-gray-800 text-left mb-4 p-3">
                     Requisitos para los voluntarios
-                </h1>
+                </h2>
             </div>
 
             <div className="space-y-4">
@@ -233,12 +181,14 @@ export const FormularioEvento: React.FC = () => {
                 <input
                     type="number"
                     id="volunteersNeeded"
-                    value={formData.volunteersNeeded}
-                    onChange={handleInputChange}
+                    {...register('voluntariosRequeridos')}
                     min="1"
                     placeholder="Ej: 10"
                     className="mt-1 w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                 />
+                {errors.voluntariosRequeridos && (
+                    <p className="text-red-500 text-sm mt-1">{errors.voluntariosRequeridos.message}</p>
+                )}
             </div>
 
             {/* Habilidades requeridas */}
@@ -254,11 +204,13 @@ export const FormularioEvento: React.FC = () => {
                         <input
                             type="text"
                             id="requiredSkills"
-                            value={formData.requiredSkills}
-                            onChange={handleInputChange}
+                            {...register('habilidadesRequeridas')}
                             placeholder="Lista separada por comas"
                             className="w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         />
+                        {errors.habilidadesRequeridas && (
+                            <p className="text-red-500 text-sm mt-1">{errors.habilidadesRequeridas.message}</p>
+                        )}
                     </div>
                     <div>
                         <label className="block text-xs text-gray-500 mb-1">
@@ -267,35 +219,39 @@ export const FormularioEvento: React.FC = () => {
                         <input
                             type="text"
                             id="optionalSkills"
-                            value={formData.optionalSkills}
-                            onChange={handleInputChange}
+                            {...register('habilidadesOpcionales')}
                             placeholder="Lista separada por comas"
                             className="w-full p-3 rounded-lg bg-gray-100 text-gray-900"
                         />
+                        {errors.habilidadesOpcionales && (
+                            <p className="text-red-500 text-sm mt-1">{errors.habilidadesOpcionales.message}</p>
+                        )}
                     </div>
                 </div>
             </div>
 
             {/* Requisitos de edad */}
-            <div className="space-y-4">
+            <div className="">
                 <label className="block text-sm font-medium text-gray-900">
-                    Requisitos de edad *
+                    Edad Requerida*
                 </label>
-                <div className="flex items-center space-x-4">
+                <div className="space-x-4">
                     <select
                         id="ageRequirement"
-                        value={formData.ageRequirement}
-                        onChange={handleInputChange}
-                        className="p-3 rounded-lg bg-gray-100 text-gray-900"
+                        {...register('edadRequerida')}
+                        className="p-3 rounded-lg mt-2 bg-gray-100 text-gray-900"
                         required
                     >
-                        <option value="" disabled>Seleccione una opción</option>
+                        <option value="" selected disabled>Seleccione una opción</option>
                         <option value="8+">Mayores de 8 años</option>
                         <option value="12+">Mayores de 12 años</option>
                         <option value="16+">Mayores de 16 años</option>
                         <option value="18+">Mayores de 18 años</option>
                         <option value="all">Todas las edades bienvenidas</option>
                     </select>
+                    {errors.edadRequerida && (
+                        <p className="text-red-500 text-sm mt-2">{errors.edadRequerida.message}</p>
+                    )}
                 </div>
             </div>
 
@@ -304,7 +260,10 @@ export const FormularioEvento: React.FC = () => {
                 <label className="block text-sm font-medium text-gray-900">
                     Tareas a realizar
                 </label>
-                <TagsInput onTagsChange={setTags} />
+                <TagsInput onTagsChange={(tags) => setValue('tareas', tags.map(tag => ({ nombre: tag.text })))} />
+                {errors.tareas && (
+                    <p className="text-red-500 text-sm mt-1">{errors.tareas.message}</p>
+                )}
             </div>
 
             {/* Requisitos adicionales */}
@@ -314,13 +273,15 @@ export const FormularioEvento: React.FC = () => {
                 </label>
                 <textarea
                     id="additionalRequirements"
-                    value={formData.additionalRequirements}
-                    onChange={handleInputChange}
+                    {...register('requisitosAdicionales')}
                     placeholder="Ej: Certificación en primeros auxilios, disponibilidad los fines de semana..."
                     className="w-full p-3 rounded-lg bg-gray-100 text-gray-900 min-h-[100px]"
                     style={{ maxHeight: '200px', minHeight: "100px" }}
                     required
                 />
+                {errors.requisitosAdicionales && (
+                    <p className="text-red-500 text-sm mt-1">{errors.requisitosAdicionales.message}</p>
+                )}
             </div>
 
             {/* Botones */}
@@ -337,9 +298,9 @@ export const FormularioEvento: React.FC = () => {
                 </div>
 
                 <div className="flex gap-4 ml-auto">
-                 
+
                     <button
-                        onClick={handleSubmit}
+                        onClick={handleSubmit(onSubmit)}
                         className="w-400px p-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition"
                     >
                         Publicar Evento

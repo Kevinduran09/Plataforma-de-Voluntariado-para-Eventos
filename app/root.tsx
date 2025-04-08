@@ -12,6 +12,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import ServiceWorker from "./core/ServiceWorker";
 import { useEffect } from "react";
+import Toast from "./components/Toast";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -70,6 +71,7 @@ export default function App() {
     <>
       <ServiceWorker />
       <Outlet />
+   
     </>
   )
 }

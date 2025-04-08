@@ -36,13 +36,17 @@
   "eventos": [
     {
       "id": "1",
-      "categoria": "Ambiental",
-      "nombre": "Reforestación en el parque",
-      "descripcion": "Evento de reforestación para mejorar las áreas verdes.",
+      "titulo": "Reforestación en el parque",
       "fecha": "2025-04-10",
-      "lugar": "Parque Nacional",
-      "voluntarios_requeridos": 20,
-      "organizador_id": "1",
+      "hora": "",
+      "ubicacion": "Parque Nacional",
+      "categoria": "Ambiental",
+      "descripcion": "Evento de reforestación para mejorar las áreas verdes.",
+      "voluntariosRequeridos": "20",
+      "habilidadesRequeridas": "",
+      "habilidadesOpcionales": "",
+      "edadRequerida": "",
+      "requisitosAdicionales": "",
       "tareas": [
         {
           "nombre": "Repartir bolsas y guantes",
@@ -56,17 +60,22 @@
           "nombre": "Clasificar residuos",
           "estado": "pendiente"
         }
-      ]
+      ],
+      "organizador_id": "1"
     },
     {
       "id": "2",
-      "categoria": "Ambiental",
-      "nombre": "Limpieza de Playa",
-      "descripcion": "Actividad para recolectar desechos y limpiar la costa.",
+      "titulo": "Limpieza de Playa",
       "fecha": "2025-04-20",
-      "lugar": "Playa Tamarindo",
-      "voluntarios_requeridos": 25,
-      "organizador_id": "3",
+      "hora": "",
+      "ubicacion": "Playa Tamarindo",
+      "categoria": "Ambiental",
+      "descripcion": "Actividad para recolectar desechos y limpiar la costa.",
+      "voluntariosRequeridos": "25",
+      "habilidadesRequeridas": "",
+      "habilidadesOpcionales": "",
+      "edadRequerida": "",
+      "requisitosAdicionales": "",
       "tareas": [
         {
           "nombre": "Repartir bolsas y guantes",
@@ -80,35 +89,150 @@
           "nombre": "Clasificar residuos",
           "estado": "pendiente"
         }
-      ]
+      ],
+      "organizador_id": "3"
     },
     {
       "id": "a9b3",
-      "categoria": "conferencia",
-      "nombre": "Sembradero de mota",
-      "descripcion": "Sembradero de mota para toda la U",
+      "titulo": "Sembradero de mota",
       "fecha": "2025-04-03",
-      "lugar": "Universidad Nacional Region chorotega",
-      "voluntarios_requeridos": "300",
-      "organizador_id": "2",
+      "hora": "",
+      "ubicacion": "Universidad Nacional Region chorotega",
+      "categoria": "conferencia",
+      "descripcion": "Sembradero de mota para toda la U",
+      "voluntariosRequeridos": "300",
+      "habilidadesRequeridas": "",
+      "habilidadesOpcionales": "",
+      "edadRequerida": "",
+      "requisitosAdicionales": "",
       "tareas": [
         {
           "nombre": "Clasificar residuos",
           "estado": "pendiente"
         }
-      ]
+      ],
+      "organizador_id": "2"
     },
     {
-      "id": "1aa4",
-      "categoria": "conferencia",
-      "nombre": "Sembradero de mota",
-      "descripcion": "Sembradero de mota para toda la U",
-      "fecha": "2025-04-03",
-      "lugar": "Universidad Nacional Region chorotega",
-      "voluntarios_requeridos": "300",
+      "id": "65f9",
+      "titulo": "Limpieza del parque central de LIberia",
+      "fecha": "2025-04-18",
+      "hora": "13:53",
+      "ubicacion": "Liberia, centro",
+      "categoria": "seminario",
+      "descripcion": "Limpieza del parque centra del cantón de Liberia, la finalidad de este evento es consolidar la comunidad Liberiana para darle mantenimiento y embellecer nuestro parque central ",
+      "voluntariosRequeridos": "10",
+      "habilidadesRequeridas": "",
+      "habilidadesOpcionales": "",
+      "edadRequerida": "16+",
+      "requisitosAdicionales": "Bolsas plástico, herramientas jardinería, guantes, escoba, pintura",
+      "tareas": [
+        {
+          "nombre": "Limpieza bancas",
+          "estado": "pendiente"
+        },
+        {
+          "nombre": "Restauración bancas",
+          "estado": "pendiente"
+        },
+        {
+          "nombre": "Limpieza zonas verdes",
+          "estado": "pendiente"
+        },
+        {
+          "nombre": "Limpieza basureros",
+          "estado": "pendiente"
+        }
+      ],
       "organizador_id": "2"
-     
-     
+    },
+    {
+      "id": "4",
+      "titulo": "Taller de Reciclaje",
+      "fecha": "2025-03-15",
+      "hora": "10:00",
+      "ubicacion": "Centro Comunitario, San José",
+      "categoria": "Educativo",
+      "descripcion": "Taller práctico sobre técnicas de reciclaje en el hogar.",
+      "voluntariosRequeridos": "15",
+      "tareas": [
+        {
+          "nombre": "Preparar materiales",
+          "estado": "completado"
+        },
+        {
+          "nombre": "Registrar participantes",
+          "estado": "completado"
+        },
+        {
+          "nombre": "Limpiar área",
+          "estado": "completado"
+        }
+      ],
+      "organizador_id": "1"
+    },
+    {
+      "id": "5",
+      "titulo": "Campaña de Donación",
+      "fecha": "2025-02-28",
+      "hora": "09:00",
+      "ubicacion": "Plaza Central, Cartago",
+      "categoria": "Social",
+      "descripcion": "Recolección de alimentos y artículos de primera necesidad.",
+      "voluntariosRequeridos": "30",
+      "tareas": [
+        {
+          "nombre": "Clasificar donaciones",
+          "estado": "completado"
+        },
+        {
+          "nombre": "Empacar víveres",
+          "estado": "completado"
+        }
+      ],
+      "organizador_id": "3"
+    },
+    {
+      "id": "6",
+      "titulo": "Charla sobre Sostenibilidad",
+      "fecha": "2025-01-20",
+      "hora": "18:30",
+      "ubicacion": "Biblioteca Municipal, Heredia",
+      "categoria": "Conferencia",
+      "descripcion": "Charla informativa sobre prácticas sostenibles en la comunidad.",
+      "voluntariosRequeridos": "10",
+      "tareas": [
+        {
+          "nombre": "Preparar sala",
+          "estado": "completado"
+        },
+        {
+          "nombre": "Atender invitados",
+          "estado": "completado"
+        }
+      ],
+      "organizador_id": "a419"
+    },
+    {
+      "id": "7",
+      "titulo": "Mantenimiento de Senderos",
+      "fecha": "2024-12-10",
+      "hora": "07:00",
+      "ubicacion": "Parque Nacional Braulio Carrillo",
+      "categoria": "Ambiental",
+      "descripcion": "Jornada de mantenimiento de senderos ecológicos.",
+      "voluntariosRequeridos": "25",
+      "tareas": [
+        {
+          "nombre": "Podar vegetación",
+          "estado": "completado"
+        },
+        {
+          "nombre": "Reparar escalones",
+          "estado": "completado"
+        }
+      ],
+      "organizador_id": "2"
     }
   ],
   "inscripciones": [
@@ -129,6 +253,36 @@
       "eventoId": "2",
       "usuarioId": "2",
       "fecha_inscripcion": "2025-03-22"
+    },
+    {
+      "id": "4",
+      "eventoId": "4",
+      "usuarioId": "2",
+      "fecha_inscripcion": "2025-03-10"
+    },
+    {
+      "id": "5",
+      "eventoId": "5",
+      "usuarioId": "2",
+      "fecha_inscripcion": "2025-02-25"
+    },
+    {
+      "id": "6",
+      "eventoId": "6",
+      "usuarioId": "2",
+      "fecha_inscripcion": "2025-01-15"
+    },
+    {
+      "id": "7",
+      "eventoId": "7",
+      "usuarioId": "2",
+      "fecha_inscripcion": "2024-12-05"
+    },
+    {
+      "id": "ef00",
+      "eventoId": "a9b3",
+      "usuarioId": "2",
+      "fecha_inscripcion": "2025-04-08T10:38:08.280Z"
     }
   ]
 }

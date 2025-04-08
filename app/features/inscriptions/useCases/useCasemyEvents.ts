@@ -1,5 +1,5 @@
 import myEventsRepository from '../domain/myEventsRepository';
-import {myEventsApi} from '../infrastructure/myEventsApi'
+import {myEventsApi} from '../infrastructure/inscriptionsApi'
 export const GetmyEvents = async () => {
     const repository = new myEventsRepository(myEventsApi);
     return repository.getData();
