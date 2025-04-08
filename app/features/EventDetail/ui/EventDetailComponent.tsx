@@ -1,13 +1,19 @@
 import React from 'react';
 import type { Evento } from '~/features/EventDashboard/domain/EventDashboard';
 import { EventTasks } from './EventTask';
+import { number } from 'zod';
+import { SubscribeToEvent } from '../useCases/useCaseEventDetail';
+import RegisterToEvent from './RegisterToEvent';
 
-const EventDetailComponent: React.FC<{ event: Evento, isSubscrited:boolean}> = ({ event, isSubscrited }) => {
+const EventDetailComponent: React.FC<{ event: Evento, isSubscrited: boolean }> = ({ event, isSubscrited }) => {
+
+ 
+
     return (
         <div className="flex flex-col gap-8 px-4 py-6">
             {/* Título del evento */}
             <div className="text-start">
-                <h1 className="text-3xl font-bold">{event.nombre}</h1>
+                <h1 className="text-3xl font-bold">{event.titulo}</h1>
             </div>
             <div>
                 <span className="text-1xl me-2 px-2.5 py-1  bg-blue-200 text-blue-500 rounded-xl">{event.categoria}</span>
@@ -48,7 +54,7 @@ const EventDetailComponent: React.FC<{ event: Evento, isSubscrited:boolean}> = (
                         </svg>
                     </div>
                     <div>
-                        <p className="text-lg font-semibold">{event.lugar}</p>
+                        <p className="text-lg font-semibold">{event.ubicacion}</p>
                     </div>
                 </div>
 
@@ -62,8 +68,8 @@ const EventDetailComponent: React.FC<{ event: Evento, isSubscrited:boolean}> = (
                         </svg>
                     </div>
                     <div>
-                        <p className="text-lg font-semibold">{event.voluntarios_requeridos} voluntarios registrados</p>
-                        <p className="text-sm text-gray-500">{Math.max(0, event.voluntarios_requeridos - (event.tareas?.length || 0))} espacios restantes</p>
+                        <p className="text-lg font-semibold">{event.voluntariosRequeridos} voluntarios registrados</p>
+                        <p className="text-sm text-gray-500">{Math.max(0, Number.parseInt(event.voluntariosRequeridos) - (event.tareas?.length || 0))} espacios restantes</p>
                     </div>
                 </div>
             </div>
@@ -77,53 +83,23 @@ const EventDetailComponent: React.FC<{ event: Evento, isSubscrited:boolean}> = (
             {/* Que traer */}
             <div>
                 <h2 className="text-2xl font-semibold">What to Bring</h2>
-                <ul className="list-disc list-inside text-gray-700 mt-2">
-                    <li>Reusable water bottle</li>
-                    <li>Sunscreen and hat</li>
-                    <li>Comfortable shoes</li>
-                </ul>
+                {event.requisitosAdicionales?(
+                    <ul className="list-disc list-inside text-gray-700 mt-2 ml-3 p-2">
+                        {
+                            event.requisitosAdicionales.split(',').map((requisito) => {
+                                return <li className='mt-2'>{requisito}</li>
+                            })
+                        }
+                    </ul>
+                ):(
+                    <h2 className='text-gray-600 mt-4 text-center'>No hay requisitos</h2>
+                )}
             </div>
 
 
             <EventTasks tareas={event.tareas} isUserSubscribed={isSubscrited} />
-            {/* <div className="mt-5">
-                <h2 className="text-2xl font-semibold border-l-4 border-l-green-500 pl-2">Tareas Pendientes</h2>
-                <div className=" p-4 rounded-lg  mt-3">
-                    <ul className="list-disc list-inside text-gray-800 ">
-                        {event.tareas?.filter(task => task.estado === 'pendiente').map((task, index) => (
-                            <li key={index} className="flex justify-between flex-wrap items-center py-2 border-b-2 shadow-2xs  pb-5 border-gray-300 ">
-                                <div className="flex-1">
-                                    <span>{task.nombre}</span>
-                                </div>
-                               <div>
-                                    <span className="bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{task.estado}</span>
-                                    <button className="ml-4 text-sm text-white bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-lg">Completar</button>
-                               </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
 
-           
-            <div className="mt-5">
-                <h2 className="text-2xl font-semibold border-l-4 border-l-red-500 pl-2">Tareas Completadas</h2>
-                <div className=" p-4 rounded-lg mt-3">
-                    <ul className="list-disc list-inside text-gray-800">
-                        {event.tareas?.filter(task => task.estado === 'completado').map((task, index) => (
-                            <li key={index} className="flex justify-between flex-wrap items-center py-2 order-b-2 border-b-2 shadow-2xs pb-5 border-gray-300 ">
-                                <span>{task.nombre}</span>
-                                <span className="bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{task.estado}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div> */}
-            <div className='w-full'>
-                <button className="w-full text-white font-semibold bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-2xl text-sm px-5 py-3 text-center transition-all duration-150">
-                    Register for this event
-                </button>
-            </div>
+           <RegisterToEvent idEvent={event.id} eventName={event.titulo} isSubscrited={isSubscrited}/>
         </div>
     );
 };

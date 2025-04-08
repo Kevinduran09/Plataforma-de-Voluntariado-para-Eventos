@@ -13,11 +13,13 @@ interface ProfileViewProps {
 }
 
 const ProfileView: React.FC<ProfileViewProps> = ({ user, onEdit }) => {
+    console.log(user);
+    
     return (
         <div className="space-y-6">
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center flex-wrap space-x-6">
                 <img
-                    src={user.foto_perfil}
+                    src={user.foto_perfil || 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=facearea&facepad=2&w=300&h=300&q=80' }
                     alt="Foto de perfil"
                     className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
                 />

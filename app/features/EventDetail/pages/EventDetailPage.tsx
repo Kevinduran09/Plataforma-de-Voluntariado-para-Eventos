@@ -42,7 +42,7 @@ export default function EventDetailPage() {
                     <h2 className=" text-gray-700 text-sm flex items-center space-x-2">
                         <Link to={'/eventDashboard'} className="font-medium hover:underline"> Home</Link>
                         <span className="text-gray-500">›</span>
-                        <span className="font-semibold">{data.nombre}</span>
+                        <span className="font-semibold">{data.titulo}</span>
                     </h2>
                 </div>
             </header>

@@ -1,5 +1,5 @@
 
-import type {myEventsapiInterface} from '../infrastructure/myEventsApi'
+import type {myEventsapiInterface} from '../infrastructure/inscriptionsApi'
 
 class myEventsRepository {
   static instance:myEventsRepository;

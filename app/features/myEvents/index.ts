@@ -1,2 +1,2 @@
-export { default as myEventsComponent } from './ui/myEventsComponent';
-export { default as myEventsPage } from './pages/myEventsPage';
+export { default as inscriptionsComponent } from './ui/inscriptionsComponent';
+export { default as inscriptionsPage } from './pages/myEventsPage';

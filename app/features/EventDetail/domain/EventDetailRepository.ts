@@ -28,5 +28,18 @@ class EventDetailRepository {
     }
     return data.length > 0 ? true : false;
   }
+  async SuscribeToEvent(idUser: string, idEvent: string){
+    const suscripción ={
+      eventoId:idEvent,
+      usuarioId:idUser,
+      fecha_inscripcion:new Date().toISOString()
+    }
+    console.log(suscripción);
+    const data = await this.api?.inscripeToEvent(suscripción)
+    if(!data){
+      throw new Error('Error al crear la inscripcion')
+    }
+    return data
+  }
 }
 export default EventDetailRepository;

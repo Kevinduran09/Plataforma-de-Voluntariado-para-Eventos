@@ -3,18 +3,23 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import ProfileView from '../ui/ProfileView';
 import ProfileEditForm from '../ui/ProfileEditForm';
 import type { userProfile } from '../domain/account';
+import useAuthStore from '~/store/useAuthStore';
+import { Getaccount } from '../useCases/useCaseaccount';
 
 export async function clientLoader() {
     // En una app real, aquí harías la llamada a la API
-    const mockUserData = {
-        id: "2",
-        nombre: "María Gómez",
-        correo: "mariagomez@example.com",
-        lugar_residencia: "Cartago",
-        numero_contacto: "+506 7777-8888",
-        foto_perfil: "/default-avatar.png"
-    };
-    return { user: mockUserData };
+   const user = useAuthStore.getState().user
+
+   try {
+        const userAccount = await Getaccount(user.id)
+        if(userAccount){
+            return {user:user}
+        }
+   } catch (error) {
+        console.error(error);
+        throw error
+        
+   }
 }
 
 export default function AccountPage() {

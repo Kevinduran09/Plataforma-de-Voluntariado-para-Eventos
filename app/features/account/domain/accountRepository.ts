@@ -12,8 +12,8 @@ class accountRepository {
     accountRepository.instance = this;
     }
 
-  async getData() {
-        // Lógica para obtener datos
+  async getData(id: string) {
+        return this.api?.fetchData(id)
     }
 
   async subscribe(data:any) {

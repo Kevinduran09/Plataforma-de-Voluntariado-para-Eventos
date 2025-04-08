@@ -1,20 +1,24 @@
-export interface Evento {
+export type Tarea = {
+    nombre: string;
+    estado: 'pendiente' | 'completado'
+};
+
+export type Evento = {
+    id: string;
+    titulo: string;
+    fecha: string; // formato 'YYYY-MM-DD'
+    hora: string;  // formato 'HH:mm'
+    ubicacion: string;
     categoria: string;
     descripcion: string;
-    fecha: Date;
-    id: string;
-    lugar: string;
-    nombre: string;
-    organizador_id: number;
+    voluntariosRequeridos: string;
+    habilidadesRequeridas: string;
+    habilidadesOpcionales: string;
+    edadRequerida: string;
+    requisitosAdicionales: string;
     tareas: Tarea[];
-    voluntarios_requeridos: number;
-}
-
-export interface Tarea {
-    estado: string;
-    nombre: string;
-}
-
+    organizador_id: string;
+};
 export interface Inscripciones {
     evento: Evento;
     eventoId: string;

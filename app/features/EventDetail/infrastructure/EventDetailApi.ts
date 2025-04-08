@@ -1,12 +1,11 @@
+import { API_URL } from "~/core/apidirection";
+
 export type EventDetailapiInterface = {
     fetchData: (id: string, options?: RequestInit) => Promise<any>;
     isSubscribe: (idEvent: string, idUser: string) => Promise<any>;
+    inscripeToEvent: (data: any) => Promise<any>;
 };
 
-const API_URL =
-    import.meta.env.VITE_PRODUCCION === "production"
-        ? import.meta.env.VITE_API_URL_PRODUCCION
-        : "http://localhost:3000";
 
 export const EventDetailApi = {
     fetchData: async (id: string) => {
@@ -38,6 +37,21 @@ export const EventDetailApi = {
             const response = await fetch('')
         } catch (error) {
             console.error('error compleating to task:', error);
+            throw error
+        }
+    },
+    inscripeToEvent: async (data: {}) => {
+        try {
+            const response = await fetch(`${API_URL}/inscripciones`, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
+            if (!response.ok) {
+                throw new Error(`Error creating inscription: ${response.statusText}`)
+            }
+            return await response.json()
+        } catch (error) {
+            console.error('erro creating inscription: ', error);
             throw error
         }
     }

@@ -8,7 +8,7 @@ export default function EventCard({evento}: {evento: Evento}) {
     const handleShare = async () => {
         try {
             await navigator.share({
-                title: evento.nombre,
+                title: evento.titulo,
                 text: evento.descripcion,
                 url: 'http:localhost:5173/eventdetail/' + evento.id,
             });
@@ -21,10 +21,10 @@ export default function EventCard({evento}: {evento: Evento}) {
   return (
       <div key={evento.id} className="bg-[#00c84621] p-4 rounded-lg shadow">
           <p className="text-sm font-semibold text-gray-600 categoria">{evento.categoria}</p>
-          <h3 className="text-lg font-bold text-gray-800 nombre">{evento.nombre}</h3>
+          <h3 className="text-lg font-bold text-gray-800 nombre">{evento.titulo}</h3>
           <p className="text-gray-600 descripcion">{evento.descripcion}</p>
-          <p className="text-gray-500 text-sm lugar">{evento.lugar} • {new Date(evento.fecha).toLocaleDateString()}</p>
-          <p className="text-gray-500 text-sm voluntarios-requeridos">{evento.voluntarios_requeridos} voluntarios requeridos</p>
+          <p className="text-gray-500 text-sm lugar">{evento.ubicacion} • {new Date(evento.fecha).toLocaleDateString()}</p>
+          <p className="text-gray-500 text-sm voluntarios-requeridos">{evento.voluntariosRequeridos} voluntarios requeridos</p>
           <div className="mt-2 acciones">
               <button
                   

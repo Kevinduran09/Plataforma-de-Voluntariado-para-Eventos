@@ -1,8 +1,8 @@
 import accountRepository from '../domain/accountRepository';
 import {accountApi} from '../infrastructure/accountApi'
-export const Getaccount = async () => {
+export const Getaccount = async (id:string) => {
     const repository = new accountRepository(accountApi);
-    return repository.getData();
+    return repository.getData(id);
 };
 
 export const Subscribeaccount = async (data:any) => {

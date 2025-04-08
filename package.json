@@ -4,13 +4,15 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "dev": "react-router dev",
+    "dev": "react-router dev ",
     "start": "react-router-serve ",
     "typecheck": "react-router typegen && tsc",
     "feature": "node ./scripts/generateFeature.cjs",
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch db.json --port 3000 --routes routes.json"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
+    "@midudev/tailwind-animations": "^0.2.0",
     "@react-router/node": "^7.3.0",
     "@react-router/serve": "^7.3.0",
     "isbot": "^5.1.17",
@@ -18,9 +20,11 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
+    "react-hook-form": "^7.55.0",
     "react-router": "^7.3.0",
     "react-router-dom": "^7.4.1",
     "react-tag-input": "^6.10.6",
+    "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
