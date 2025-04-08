@@ -1,12 +1,17 @@
 export type EventDetailapiInterface = {
-    fetchData: (url: string, options?: RequestInit) => Promise<any>;
+    fetchData: (id: string, options?: RequestInit) => Promise<any>;
     isSubscribe: (idEvent: string, idUser: string) => Promise<any>;
 };
 
+const API_URL =
+    import.meta.env.VITE_PRODUCCION === "production"
+        ? import.meta.env.VITE_API_URL_PRODUCCION
+        : "http://localhost:3000";
+
 export const EventDetailApi = {
-    fetchData: async (url: string) => {
+    fetchData: async (id: string) => {
         try {
-            const response = await fetch(url);
+            const response = await fetch(`${API_URL}/eventos/${id}`);
             if (!response.ok) {
                 throw new Error(`Error fetching data: ${response.statusText}`);
             }
@@ -18,21 +23,21 @@ export const EventDetailApi = {
     },
     isSubscribe: async (idEvent: string, idUser: string) => {
         try {
-            const response = await fetch(`http://localhost:3000/inscripciones?usuarioId=${idUser}&eventoId=${idEvent}`);
+            const response = await fetch(`${API_URL}/inscripciones?usuarioId=${idUser}&eventoId=${idEvent}`);
             if (!response.ok) {
                 throw new Error(`Error fetching data: ${response.statusText}`);
             }
-           return await response.json();
+            return await response.json();
         } catch (error) {
             console.error('Error en la API:', error);
             throw error;
         }
     },
-    completeTask:async (name:String)=>{
+    completeTask: async (name: String) => {
         try {
             const response = await fetch('')
         } catch (error) {
-            console.error('error compleating to task:',error);
+            console.error('error compleating to task:', error);
             throw error
         }
     }
