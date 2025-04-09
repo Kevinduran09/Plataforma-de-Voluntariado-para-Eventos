@@ -11,5 +11,9 @@ export const EventDashboardApi = {
     getEventsByUser: async (userId: string)=>{
         const response = await fetch(`${API_URL}/inscripciones?usuarioId=${userId}&_embed=evento`)
         return response.json()
+    },
+    getEventsByUserLimit: async (userId: string) => {
+        const response = await fetch(`${API_URL}/inscripciones?usuarioId=${userId}&_embed=evento&_limit=4`)
+        return response.json()
     }
 }

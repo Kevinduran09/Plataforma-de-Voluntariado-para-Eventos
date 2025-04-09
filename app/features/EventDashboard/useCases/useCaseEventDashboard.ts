@@ -10,3 +10,9 @@ export const GetInscriptionEvents = async (userId:string) => {
     const repository = new EventDashboardRepository(EventDashboardApi);
     return repository.geInscriptionEvents(userId);
 };
+
+
+export const GetInscriptionEventsLimit = async (userId: string) => {
+    const repository = new EventDashboardRepository(EventDashboardApi);
+    return repository.geInscriptionEventsLimit(userId);
+};

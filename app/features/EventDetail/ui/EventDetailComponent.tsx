@@ -3,7 +3,7 @@ import type { Evento } from '~/features/EventDashboard/domain/EventDashboard';
 import { EventTasks } from './EventTask';
 import { number } from 'zod';
 import { SubscribeToEvent } from '../useCases/useCaseEventDetail';
-import RegisterToEvent from './RegisterToEvent';
+import ButtonDetailEvent from './ButtonDetailEvent';
 
 const EventDetailComponent: React.FC<{ event: Evento, isSubscrited: boolean }> = ({ event, isSubscrited }) => {
 
@@ -99,7 +99,7 @@ const EventDetailComponent: React.FC<{ event: Evento, isSubscrited: boolean }> =
 
             <EventTasks tareas={event.tareas} isUserSubscribed={isSubscrited} />
 
-           <RegisterToEvent idEvent={event.id} eventName={event.titulo} isSubscrited={isSubscrited}/>
+            <ButtonDetailEvent idEvent={event.id} eventName={event.titulo} isSubscrited={isSubscrited}/>
         </div>
     );
 };

@@ -32,7 +32,7 @@ export async function clientAction({ request }: ActionFunctionArgs) {
 export default function loginPage() {
 
     return (
-        <div className='flex flex-col items-center justify-center h-screen'>
+        <div className='flex flex-col items-center justify-center h-auto lg:h-screen'>
             <LoginCard />
         </div>
     );

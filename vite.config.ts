@@ -6,8 +6,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   server:{
-    watch:{
-      ignored: ['**/db.json']
-    }
+    host: '0.0.0.0', // Permite el acceso desde la red local
+    port: 4000,       // Define el puerto deseado
+    
   }
 });

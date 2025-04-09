@@ -49,9 +49,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/volunthub-192x192.png" />
-
-
-
         <Meta />
         <Links />
       </head>
@@ -59,26 +56,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <script src="/registerService.js" />
       </body>
     </html>
   );
 }
 
 export default function App() {
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/sw.js")
-        .then((registration) => {
-          console.log("Service Worker registrado con éxito:", registration);
-
-        })
-        .catch((error) => {
-          console.error("Error al registrar el Service Worker:", error);
-        });
-    }
-  }, [])
   return (
+
     <>
 
       <Outlet />
