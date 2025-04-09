@@ -5,6 +5,7 @@ import ProfileEditForm from '../ui/ProfileEditForm';
 import type { userProfile } from '../domain/account';
 import useAuthStore from '~/store/useAuthStore';
 import { Getaccount } from '../useCases/useCaseaccount';
+import { accountApi } from '../infrastructure/accountApi';
 
 export async function clientLoader() {
     // En una app real, aquí harías la llamada a la API
@@ -13,7 +14,7 @@ export async function clientLoader() {
    try {
         const userAccount = await Getaccount(user.id)
         if(userAccount){
-            return {user:user}
+            return {user:userAccount}
         }
    } catch (error) {
         console.error(error);
@@ -30,10 +31,12 @@ export default function AccountPage() {
 
     const handleSave = async (updatedUser: userProfile) => {
         try {
-            // En una app real, esto llamaría a tu API
-            // await updateUserProfile(updatedUser);
-            // setUser(updatedUser);
-            // setIsEditing(false);
+            // Llama a la API para actualizar los datos del usuario
+            const updatedData = await accountApi.updateData(updatedUser.id, updatedUser);
+    
+            // Actualiza el estado local con los datos actualizados
+            setUser(updatedData);
+            setIsEditing(false);
         } catch (error) {
             console.error("Error al guardar los cambios:", error);
         }
