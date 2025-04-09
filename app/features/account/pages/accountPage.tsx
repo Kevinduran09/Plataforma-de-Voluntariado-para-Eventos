@@ -13,7 +13,7 @@ export async function clientLoader() {
    try {
         const userAccount = await Getaccount(user.id)
         if(userAccount){
-            return {user:user}
+            return { user: userAccount }
         }
    } catch (error) {
         console.error(error);
