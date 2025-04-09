@@ -6,6 +6,7 @@ self.addEventListener('install', event => {
 });
 
 
+// comentario
 self.addEventListener('fetch', event => {
     // Redirige a la lógica de caché con red
     if (event.request.url.startsWith('chrome-extension://')) {
