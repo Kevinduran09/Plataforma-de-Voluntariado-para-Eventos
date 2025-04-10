@@ -19,13 +19,13 @@ export async function clientLoader({ params }: { params: { id: string } }) {
         if (!user) {
             throw new Response('Usuario no autenticado', { status: 401 });
         }
-        if(!user.id) {
+        if (!user.id) {
             return { data: data, isSub: false };
         }
         const isSub: boolean = await isUserSubscribed(user.id, data.id);
-        console.log('Usuario:', user.id, 'Evento:', data.id, 'Suscrito:', isSub);
-        
-        return { data:data,isSub };
+
+
+        return { data: data, isSub };
     } catch (error) {
         console.error('Error al cargar el evento:', error);
         throw new Response('Error al cargar el evento', { status: 500 });
@@ -33,8 +33,8 @@ export async function clientLoader({ params }: { params: { id: string } }) {
 }
 
 export default function EventDetailPage() {
-    const { data,isSub } = useLoaderData<{ data: Evento,isSub:boolean }>();
-
+    const { data, isSub } = useLoaderData<{ data: Evento, isSub: boolean }>();
+    
     return (
         <div className="container mx-auto max-w-4xl px-3 mt-10">
             <header>

@@ -6,7 +6,9 @@ export const GetEventDashboard = async () => {
     return repository.getData() ;
 };
 
-export const GetInscriptionEvents = async (userId:string) => {
+
+
+export const GetInscriptionEventsLimit = async (userId: string) => {
     const repository = new EventDashboardRepository(EventDashboardApi);
-    return repository.geInscriptionEvents(userId);
+    return repository.geInscriptionEventsLimit(userId);
 };

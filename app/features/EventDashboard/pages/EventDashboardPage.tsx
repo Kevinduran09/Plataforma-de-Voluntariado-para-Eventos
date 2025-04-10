@@ -1,5 +1,4 @@
-import { use, useEffect, useState } from "react";
-import { data, useLoaderData, useNavigate } from "react-router";
+import { useLoaderData } from "react-router";
 import '../styles/buttonsStyles.css';
 import '../styles/eventStyle.css';
 import type { Route } from '.react-router/types/app/+types/root';
@@ -7,9 +6,10 @@ import type { Evento } from "../domain/EventDashboard";
 import { GetEventDashboard } from "../useCases/useCaseEventDashboard";
 
 import InscriptionEvents from "../ui/InscriptionEvents";
-import EventCard from "../ui/EventCard";
+import EventCard from "~/components/EventCard";
 import useAuthStore from "~/store/useAuthStore";
 import { type userInterface } from "~/features/login/domain/login";
+import { isPastEvent } from "~/helpers/eventHelper";
 
 
 export function meta({ }: Route.MetaArgs) {
@@ -54,7 +54,7 @@ export default function EventDashboardPage() {
             <p>No hay eventos disponibles.</p>
           ) : (
             eventos.map((evento) => (
-              <EventCard key={evento.id} evento={evento} />
+              <EventCard key={evento.id} event={evento} isPast={isPastEvent(evento)}/>
             ))
           )
         }

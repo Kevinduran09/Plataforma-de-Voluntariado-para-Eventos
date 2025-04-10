@@ -44,7 +44,7 @@ const TaskList: React.FC<TaskListProps> = ({
 
     return (
         <div className="mt-5">
-            <h2 className={`text-2xl font-semibold border-l-4 border-l-${borderColor}-500 pl-2`}>
+            <h2 className={`text-2xl font-semibold border-l-4 border-l-${borderColor}-400 pl-2`}>
                 {title}
             </h2>
             <div className="p-4 rounded-lg mt-3">

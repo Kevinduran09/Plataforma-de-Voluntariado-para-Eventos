@@ -1,6 +1,6 @@
 import React from 'react';
 import { type Tarea } from '~/features/EventDashboard/domain/EventDashboard';
-import { calculateTaskProgress } from '../domain/eventHelper';
+import { calculateTaskProgress } from '~/helpers/eventHelper';
 
 interface TaskProgressProps {
     tasks: Tarea[];

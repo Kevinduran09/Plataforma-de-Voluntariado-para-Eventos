@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import useAuthStore from '~/store/useAuthStore';
-import { GetInscriptionEvents } from '../useCases/useCaseEventDashboard';
+import {  GetInscriptionEventsLimit } from '../useCases/useCaseEventDashboard';
 import type { Inscripciones } from '../domain/EventDashboard';
 import { ItemPillComponent } from './ItemPillComponent';
+import { Link } from 'react-router';
 
 export default function InscriptionEvents() {
     const [eventsInscription, setEventsInscription] = useState<Inscripciones[]>([]);
@@ -19,7 +20,7 @@ export default function InscriptionEvents() {
             }
 
             try {
-                const events = (await GetInscriptionEvents(user.id)) || [];
+                const events = (await GetInscriptionEventsLimit(user.id)) || [];
                 console.log(events);
 
                 setEventsInscription(events);
@@ -51,12 +52,12 @@ export default function InscriptionEvents() {
                                 }
                             </ul>
                             <div className="w-full flex justify-center">
-                                <button
-
+                                <Link
+                                    to={'/profile/inscriptions'}
                                     className="btnVerTodos mt-4 w-fit bg-blue-500 text-white py-2 px-3 rounded-lg transition-all duration-300"
                                 >
                                     Ver Todos Mis Eventos
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

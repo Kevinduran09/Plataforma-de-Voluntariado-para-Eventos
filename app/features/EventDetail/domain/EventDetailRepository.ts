@@ -1,5 +1,5 @@
 import type { EventDetailapiInterface } from '../infrastructure/EventDetailApi';
-import type { Evento } from '~/features/EventDashboard/domain/EventDashboard';
+import type { Evento, Tarea } from '~/features/EventDashboard/domain/EventDashboard';
 
 class EventDetailRepository {
   static instance: EventDetailRepository;
@@ -21,23 +21,39 @@ class EventDetailRepository {
     return data as Evento;
   }
 
-  async Issubscribe(idUser: string, idEvent: string){
+  async Issubscribe(idUser: string, idEvent: string) {
     const data = await this.api?.isSubscribe(idEvent, idUser)
     if (!data) {
       throw new Error('Error al verificar la suscripción');
     }
     return data.length > 0 ? true : false;
   }
-  async SuscribeToEvent(idUser: string, idEvent: string){
-    const suscripción ={
-      eventoId:idEvent,
-      usuarioId:idUser,
-      fecha_inscripcion:new Date().toISOString()
+  async SuscribeToEvent(idUser: string, idEvent: string) {
+    const suscripción = {
+      eventoId: idEvent,
+      usuarioId: idUser,
+      fecha_inscripcion: new Date().toISOString()
     }
-    console.log(suscripción);
     const data = await this.api?.inscripeToEvent(suscripción)
-    if(!data){
+    if (!data) {
       throw new Error('Error al crear la inscripcion')
+    }
+    return data
+  }
+
+  async unSubscribetoEvent(idUser: string, idEvent: string){
+    const data = await this.api?.unSubcrip({ userId: idUser, eventId: idEvent })
+    if (!data) {
+      throw new Error('Error al crear la inscripcion')
+    }
+    return data
+  }
+  async CompleteTask(new_tareas:Tarea[],idEvento:string){
+    const data = await this.api?.changeTaskState(new_tareas, idEvento)
+    console.log(data);
+    
+    if(!data.success){
+      throw new Error('error en los datos')
     }
     return data
   }

@@ -16,8 +16,9 @@ class EventDashboardRepository {
     return this.api?.getInfo()
   }
 
-  async geInscriptionEvents(userId: string) {
-    return this.api?.getEventsByUser(userId)
+  async geInscriptionEventsLimit(userId: string) {
+    return this.api?.getEventsByUserLimit(userId)
   }
+
 }
 export default EventDashboardRepository;

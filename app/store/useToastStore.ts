@@ -8,7 +8,8 @@ interface toastInterface{
     title:string,
     message:string,
     type: ToastType,
-    openToast:(title:string,message:string,type?:ToastType,duration?:number)=>void
+    openToast:(title:string,message:string,type?:ToastType,duration?:number)=>void,
+    closeToast:()=>void
 }
 
 export const useToast = create <toastInterface>((set)=>({
@@ -28,6 +29,7 @@ export const useToast = create <toastInterface>((set)=>({
         set({ isOpen: false, title:title,message:'',type:'info'})
         toastTimeout=null
     }, duration)
-    }
+    },
+    closeToast: ()=>set({isOpen:false})
 
 }))

@@ -1,8 +1,15 @@
+
+import { savePostRequest } from "public/idb";
 import type { typeEventSchema } from "../domain/CreateEvent";
 
 export type CreateEventapiInterface = {
     createEvent: (data: typeEventSchema) => Promise<any>;
 };
+interface ServiceWorkerRegistrationWithSync extends ServiceWorkerRegistration {
+    sync: {
+        register: (tag: string) => Promise<void>;
+    };
+}
 
 const API_URL =
     import.meta.env.VITE_PRODUCCION === "production"
@@ -15,17 +22,29 @@ export const CreateEventApi = {
     createEvent: async (data: typeEventSchema) => {
         console.log(data);
         
-        const response = await fetch(`${API_URL}/eventos`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        console.log(response)
-        
-        return response.json();
+       try {
+           const response = await fetch(`${API_URL}/eventos`, {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json',
+               },
+               body: JSON.stringify(data),
+           });
+           const result = await response.json();
+
+           if (result.savedOffline) {
+               console.log("Datos guardados offline. Se enviarán cuando haya conexión.");
+           }
+
+           return result;
+       } catch (error) {
+          console.error('Error al enviar el evento',error);
+          throw error
+          
+       }
     },
+
+
     UploadImage: async(file:File)=>{
         const formData = new FormData();
         formData.append('file', file);

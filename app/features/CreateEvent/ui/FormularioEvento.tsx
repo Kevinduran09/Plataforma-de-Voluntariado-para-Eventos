@@ -11,31 +11,40 @@ import { useToast } from '~/store/useToastStore';
 
 
 export const FormularioEvento: React.FC = () => {
-    const {openToast} =useToast()
+    const { openToast } = useToast()
     const { user } = useAuthStore()
     const { register, handleSubmit, formState: { errors }, setValue, control } = useForm<typeEventSchema>({
         resolver: zodResolver(eventSchema),
         defaultValues: {
             tareas: [],
-            organizador_id:user.id
+            organizador_id: user.id
         }
     })
 
 
     const onSubmit = async (data: typeEventSchema) => {
-        
-        
+
+
         try {
             const result = await PostCreateEvent(data);
+            console.log(result);
             
-            if(result){
-                openToast('Evento publicado',`El evento ${data.titulo} se publico`)
+            if (result.savedOffline) {
+                openToast('Guardado offline', `El evento ${data.titulo} se publicara cuando haya conexion`, 'success')
+
+            } else {
+                openToast('Guardado exitoso', `El evento ${data.titulo} se publico`, 'success')
+            }
+            if (result && !result.savedOffline) {
+                openToast('Evento publicado', `El evento ${data.titulo} se publico`)
             }
         } catch (error) {
             console.error("Error:", error);
+            openToast('No se pudo enviar el evento', 'Intente mas tarde', 'error')
+
         }
     };
-  
+
     return (
         <div className="space-y-6 p-6 rounded-lg" >
             <header>
@@ -257,7 +266,7 @@ export const FormularioEvento: React.FC = () => {
 
             {/* Tarea a realizar (tag input) */}
             <div>
-                <label className="block text-sm font-medium text-gray-900">
+                <label className="block text-sm font-medium text-gray-900 ">
                     Tareas a realizar
                 </label>
                 <TagsInput onTagsChange={(tags) => setValue('tareas', tags.map(tag => ({ nombre: tag.text })))} />

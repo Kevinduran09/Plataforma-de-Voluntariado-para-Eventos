@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Evento } from '~/features/EventDashboard/domain/EventDashboard';
 import { EventTasks } from './EventTask';
 import { number } from 'zod';
 import { SubscribeToEvent } from '../useCases/useCaseEventDetail';
-import RegisterToEvent from './RegisterToEvent';
+import ButtonDetailEvent from './ButtonDetailEvent';
 
 const EventDetailComponent: React.FC<{ event: Evento, isSubscrited: boolean }> = ({ event, isSubscrited }) => {
 
- 
+    const [isSub, setIsSub] = useState(isSubscrited)
+    useEffect(()=>{
 
+    }, [isSub])
+
+    const handleChangeSubcriptionState= ()=> setIsSub(!isSub)
+    
     return (
         <div className="flex flex-col gap-8 px-4 py-6">
             {/* Título del evento */}
@@ -97,9 +102,9 @@ const EventDetailComponent: React.FC<{ event: Evento, isSubscrited: boolean }> =
             </div>
 
 
-            <EventTasks tareas={event.tareas} isUserSubscribed={isSubscrited} />
+            <EventTasks tareas={event.tareas} isUserSubscribed={isSub} evento_id={event.id} />
 
-           <RegisterToEvent idEvent={event.id} eventName={event.titulo} isSubscrited={isSubscrited}/>
+            <ButtonDetailEvent idEvent={event.id} eventName={event.titulo} isSubscrited={isSub} handleSub={handleChangeSubcriptionState} />
         </div>
     );
 };
