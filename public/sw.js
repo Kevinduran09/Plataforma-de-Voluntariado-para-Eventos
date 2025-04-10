@@ -1,40 +1,36 @@
 const CACHE_DYNAMIC_NAME = 'volunatarios-cache';
 const CACHE_STATIC_NAME = 'volunatarios-cache-static';
-
+const CATCH_METHODS = ['POST', 'PATCH', 'PUT', 'DELETE']
+const API_URL = 'https://p01--json-server-db--yl5ffkw8twzb.code.run'
 // Archivos estáticos que queremos almacenar en caché
-const STATIC_FILES = ['/', '/index.html', "/assets/LandingPage-BVfKfWAI.js", "/assets/EventDashboardPage-BUso8_V-.js", "/assets/root-DmYIuWCt.css", "/assets/useCaseEventDashboard-5Iqa_f-x.css"]
+const STATIC_FILES = ['/', '/index.html', "/assets/LandingPage-LW7tv-NQ.js", "/assets/EventDashboardPage-CBP3T0r-.js", "/assets/root-DhewjpDU.css", "/assets/EventDashboardPage-5Iqa_f-x.css", "/manifest.json", "/volunthub-512x512.png", "/Work-in-progress.gif"]
 
 self.addEventListener('install', event => {
     console.log('Service Worker instalado');
-
-    // Pre-cache de archivos estáticos
-    event.waitUntil(
-        caches.open(CACHE_STATIC_NAME)
-            .then(cache => {
-                console.log('Caché estática en la instalación');
-                return cache.addAll(STATIC_FILES);
-            })
-    );
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
+
     console.log('Service Worker activado');
-    // Aquí puedes limpiar las cachés antiguas si es necesario
 });
+// comentario
+self.addEventListener('fetch', (event) => {
+    const { request } = event
 
-self.addEventListener('fetch', event => {
-    const { request } = event;
 
-    // Si la solicitud es de un archivo estático, manejarlo con la caché estática
-    if (STATIC_FILES.includes(new URL(request.url).pathname)) {
-        event.respondWith(handleStaticFile(request));
-    } else if (request.method === 'POST' && request.url.includes('https://p01--json-server-db--yl5ffkw8twzb.code.run/eventos')) {
-        event.respondWith(handlePostRequest(request));
+    if (request.url.startsWith('chrome-extension://')) {
+        return; // No hacer nada si la solicitud es de una extensión de Chrome
+    }
+
+
+    if (request.method === 'POST' || request.method === 'PATCH' && url.href.startsWith(API_URL)) {
+        event.respondWith(handlePostRequest(request))
     } else {
         // En todos los demás casos, usar fetch + cache
         event.respondWith(handleFetch(event));
     }
 });
+
 
 // Manejo de archivos estáticos
 function handleStaticFile(request) {
@@ -63,7 +59,13 @@ async function handlePostRequest(request) {
         return response;
     } catch (error) {
         const body = await request.clone().json();
-        await saveRequest(body);
+        console.log(body)
+        const data = {
+            method: request.method,
+            url: request.url,
+            data: body
+        }
+        await saveRequest(data);
 
         const registration = await self.registration;
         if ('sync' in registration) {
@@ -86,16 +88,34 @@ async function handlePostRequest(request) {
 }
 
 self.addEventListener('sync', (event) => {
-    if (event.tag === 'sync-posts') {
-        event.waitUntil(syncPosts());
+    if (event.tag == 'sync-posts') {
+        event.waitUntil(processQueuedRequests())
+
     }
-});
+})
 
-async function syncPosts() {
-    console.log('Sincronizando los posts pendientes...');
-    // Aquí procesarías las solicitudes de la base de datos offline
-}
+// async function processQueuedRequests() {
+//     const requests = await getAllRequests()
 
+//     await Promise.all(
+//         requests.map(async () => {
+//             try {
+//                 await fetch("https://p01--json-server-db--yl5ffkw8twzb.code.run/eventos", {
+//                     method: "POST",
+//                     headers: {
+//                         "Content-Type": "application/json"
+//                     },
+//                     body: JSON.stringify(req),
+//                 });
+//             } catch (error) {
+//                 console.error('Reintento fallido', error);
+
+//             }
+//         })
+//     )
+
+//     await clearRequests()
+// }
 
 async function processQueuedRequests() {
     const requests = await getAllRequests();
@@ -103,12 +123,12 @@ async function processQueuedRequests() {
     await Promise.all(
         requests.map(async (req) => {
             try {
-                await fetch("https://p01--json-server-db--yl5ffkw8twzb.code.run/eventos", {
-                    method: "POST",
+                await fetch(req.url, {
+                    method: req.method,
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(req),
+                    body: JSON.stringify(req.data),
                 });
             } catch (error) {
                 console.error('Reintento fallido', error);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { type Evento } from '~/features/EventDashboard/domain/EventDashboard'; 
-import { formatEventDate } from '../domain/dateFormatters';
+import { formatEventDate } from '~/helpers/dateFormatters';
 import TaskProgress from './TaskProgress';
 import EventDateBadge from './EventDateBadge';
 

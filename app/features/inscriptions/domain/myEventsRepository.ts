@@ -1,10 +1,10 @@
 
-import type {myEventsapiInterface} from '../infrastructure/inscriptionsApi'
+import type { myInscriptionsapiInterface } from '../infrastructure/inscriptionsApi'
 
 class myEventsRepository {
   static instance:myEventsRepository;
-  api: myEventsapiInterface | undefined;
-  constructor(api: myEventsapiInterface) {
+  api: myInscriptionsapiInterface | undefined;
+  constructor(api: myInscriptionsapiInterface) {
         if (myEventsRepository.instance) {
             return myEventsRepository.instance;
         }
@@ -12,8 +12,8 @@ class myEventsRepository {
     myEventsRepository.instance = this;
     }
 
-  async getData() {
-        // Lógica para obtener datos
+  async getEventsInscription(userId:string) {
+    return this.api?.getEventsByUser(userId)
     }
 
   async subscribe(data:any) {

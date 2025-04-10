@@ -40,6 +40,9 @@ export default function ProfilePage() {
                                 {item.label}
                             </SidebarNavItem>
                         ))}
+                        <a href="" className='flex items-center px-4 py-3 rounded-lg transition-colors text-gray-700 hover:bg-gray-100'>
+                            <span className='mr-3 text-lg'>logout</span>
+                       </a>
                     </nav>
                 </div>
 

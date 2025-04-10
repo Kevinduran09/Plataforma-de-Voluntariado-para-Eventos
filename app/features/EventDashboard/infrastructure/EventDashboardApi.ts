@@ -8,10 +8,6 @@ export const EventDashboardApi = {
         const response = await fetch(`${API_URL}/eventos`);
         return response.json();
     },
-    getEventsByUser: async (userId: string)=>{
-        const response = await fetch(`${API_URL}/inscripciones?usuarioId=${userId}&_embed=evento`)
-        return response.json()
-    },
     getEventsByUserLimit: async (userId: string) => {
         const response = await fetch(`${API_URL}/inscripciones?usuarioId=${userId}&_embed=evento&_limit=4`)
         return response.json()

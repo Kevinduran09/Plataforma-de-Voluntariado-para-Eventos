@@ -2,7 +2,8 @@ import type { Evento, Inscripciones, Tarea } from "~/features/EventDashboard/dom
 
 export function organizeEventsByDate(events: Inscripciones[]) {
     const now = new Date();
-
+    console.log(events);
+    
     const upcomingEvents = events
         .filter(event => new Date(event.evento.fecha) >= now)
         .sort((a, b) => new Date(a.evento.fecha).getTime() - new Date(b.evento.fecha).getTime());
@@ -21,4 +22,12 @@ export function calculateTaskProgress(tasks: Tarea[]) {
         total: tasks.length,
         percentage: Math.round((completed / tasks.length) * 100)
     };
+}
+
+export function isPastEvent(event:Evento){
+    const now = new Date()
+    
+    const eventDate = new Date(event.fecha)
+
+    return eventDate < now
 }

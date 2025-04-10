@@ -19,8 +19,6 @@ class EventDashboardRepository {
   async geInscriptionEventsLimit(userId: string) {
     return this.api?.getEventsByUserLimit(userId)
   }
-  async geInscriptionEvents(userId: string) {
-    return this.api?.getEventsByUser(userId)
-  }
+
 }
 export default EventDashboardRepository;

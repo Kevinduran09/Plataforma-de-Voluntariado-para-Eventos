@@ -1,19 +1,36 @@
-import TaskList from './TaskList'; // Ensure TaskList is a valid React component
+import { useToast } from '~/store/useToastStore';
+import { CompleteTask } from '../useCases/useCaseEventDetail';
+import TaskList from './TaskList';
+import { useRevalidator } from 'react-router';
 
-// En tu componente principal
-interface Event {
-    tareas?: Array<any>; // Replace 'any' with the actual type of 'tareas' if known
-}
 
-export const EventTasks = ({ tareas, isUserSubscribed }: { tareas: Array<any>; isUserSubscribed: boolean }) => {
-    const handleCompleteTask = (taskId: any) => {
-        // Lógica para marcar tarea como completada
-        console.log('Completar tarea:', taskId);
+
+export const EventTasks = ({ tareas, isUserSubscribed, evento_id }: { tareas: Array<any>; isUserSubscribed: boolean, evento_id: string }) => {
+    const { openToast } = useToast()
+    const revalidator = useRevalidator()
+    const handleCompleteTask = async (taskname: string) => {
+
+        try {
+            const new_tareas = tareas.map(t => t.nombre === taskname ? { ...t, estado: 'completado' } : t)
+            const result = await CompleteTask(new_tareas, evento_id)
+            console.log(result);
+            if (result.savedOffline) {
+                openToast('Guardado offline', `Se realizara el cambio cuando tenga conexion de nuevo`, 'success')
+                revalidator.revalidate()
+            } else {
+
+                openToast('Completado!', `Haz completado la tarea ${taskname}`, 'success')
+                revalidator.revalidate()
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            openToast('ERROR', 'No se ha podido completar la tarea', 'error')
+        }
     };
 
     return (
         <div>
-            <TaskList // Ensure TaskList is used as a React component
+            <TaskList
                 tasks={tareas || []}
                 statusFilter="pendiente"
                 title="Tareas Pendientes"

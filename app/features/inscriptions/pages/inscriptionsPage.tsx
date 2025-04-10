@@ -1,10 +1,9 @@
-import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import EventListSection from '../ui/EventListSection';
-import { organizeEventsByDate } from '../domain/eventHelper';
-import type { Evento, Inscripciones, Tarea } from "~/features/EventDashboard/domain/EventDashboard";
+import EventListSection from '~/components/EventListSection';
+import { organizeEventsByDate } from '~/helpers/eventHelper';
+import type { Inscripciones } from "~/features/EventDashboard/domain/EventDashboard";
 import useAuthStore from '~/store/useAuthStore';
-import { GetInscriptionEvents } from '~/features/EventDashboard';
+import { getEventsInscription } from '../useCases/useCasemyEvents';
 
 
 export async function clientLoader() {
@@ -63,7 +62,7 @@ export async function clientLoader() {
     //     // Más eventos...
     // ];
     try {
-        const events = (await GetInscriptionEvents(user.id)) || [];
+        const events = (await getEventsInscription(user.id)) || [];
         return { eventsInscription: events };
     } catch (error) {
         console.error(error);

@@ -13,6 +13,7 @@ import "./app.css";
 import ServiceWorker from "./core/ServiceWorker";
 import { useEffect } from "react";
 import Toast from "./components/Toast";
+import NetworkStatus from "./components/NetworkStatus";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -28,19 +29,6 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  // useEffect(() => {
-  //   if ("serviceWorker" in navigator) {
-  //     navigator.serviceWorker
-  //       .register("/sw.js")
-  //       .then((registration) => {
-  //         console.log("Service Worker registrado con éxito:", registration);
-
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error al registrar el Service Worker:", error);
-  //       });
-  //   }
-  // }, [])
 
   return (
     <html lang="en">
@@ -66,7 +54,7 @@ export default function App() {
   return (
 
     <>
-
+      
       <Outlet />
 
     </>
